@@ -19,7 +19,7 @@ interface DataDAO {
     @Update
     suspend fun updateReminder(reminderItem: ReminderItem)
 
-    @Query("select * from REMINDER_TABLE ORDER BY id DESC")
+    @Query("select * from REMINDER_TABLE ORDER BY date DESC")
     fun getReminder():Flow<List<ReminderItem>>
 
 
