@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance_heading">
+        <item name="android:textColor">@color/heading_color</item>
+        <item name="android:textSize">@dimen/heading_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextAppearance_subheading">
+        <item name="android:textColor">@color/subheading_color</item>
+        <item name="android:textSize">@dimen/subheading_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="TextAppearance_smallsubheading">
+        <item name="android:textColor">@color/smallsubheading_color</item>
+        <item name="android:textSize">@dimen/smallsubheading_text_size</item>
+    </style>
+
+    <style name="CardView_Reminder">
+        <item name="cardBackgroundColor">?colorPrimary</item>
+        <item name="cardCornerRadius">@dimen/cardview_corner</item>
+        <item name="cardElevation">@dimen/cardview_elevation</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
+    <style name="Round_Image">
+        <item name="cornerSize">50%</item>
+        <item name="cornerRadius">@dimen/card_img_size</item>
+        <item name="strokeWidth">@dimen/card_stroke_radious</item>
+        <item name="strokeColor">@color/md_theme_light_primary</item>
+    </style>
+
+    <dimen name="cardview_corner">15dp</dimen>
+    <dimen name="cardview_elevation">5dp</dimen>
+</resources>

@@ -43,4 +43,17 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="Add">Add</string>
+    <string name="search_hint">Search</string>
+    <string name="profile">Profile</string>
+    <string name="filter">Filter</string>
+    <string name="notification">Notification</string>
+    <string name="voice_search">Voice Search</string>
+    <string name="store">Store</string>
+    <string name="gifts">Gifts</string>
+    <string name="home">Home</string>
+    <string name="text_hint">Rohitash Yogi</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="hash">#</string>
 </resources>

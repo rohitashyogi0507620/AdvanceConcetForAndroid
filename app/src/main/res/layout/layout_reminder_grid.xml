@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CardView_Reminder"
+    app:cardBackgroundColor="@color/colortheme1"
+    app:strokeColor="@color/colortheme1_1"
+    app:strokeWidth="@dimen/card_stroke_radious"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_margin="@dimen/margin_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_profile"
+                android:padding="@dimen/margin_5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="@dimen/card_img_size"
+                android:layout_height="@dimen/card_img_size"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:strokeWidth="@dimen/card_stroke_radious"
+                app:strokeColor="@color/colortheme1_1"
+                app:shapeAppearanceOverlay="@style/Round_Image"
+                android:src="@drawable/ic_profile_demo"
+                 />
+
+
+            <ImageView
+                android:id="@+id/img_delete"
+                app:tint="@color/colortheme1_1"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_delete" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_name"
+                style="@style/TextAppearance_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_profile"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="@string/text_hint"
+                android:textColor="@color/colortheme1_1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_date_time"
+                style="@style/TextAppearance_subheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_name"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="21 January"
+                android:textColor="@color/colortheme1_1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_wish"
+                style="@style/TextAppearance_subheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_date_time"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="Your birthday is most special movement in my life"
+                android:textColor="@color/colortheme1_1" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
