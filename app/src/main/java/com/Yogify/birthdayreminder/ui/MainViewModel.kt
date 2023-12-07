@@ -10,6 +10,7 @@ import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.data.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,30 +18,14 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val mainRepository: MainRepository) : ViewModel() {
 
 
-    private val _reminderlist = MutableLiveData<List<ReminderItem>>()
-    val reminderlist = _reminderlist
-
     private val _insertReminder = MutableLiveData<String>()
     val insertReminder = _insertReminder
 
     private val _deleteReminder = MutableLiveData<String>()
     val deleteReminder = _deleteReminder
 
-    val reminderList = Pager(
-        PagingConfig(
-            pageSize = 5,
-            enablePlaceholders = true,
-            initialLoadSize = 5
-        ),
-    ) {
-        MainPagingSource(dao = mainRepository.getdao())
-    }.flow.cachedIn(viewModelScope)
-
     init {
 
-
-
-        //getReminder()
     }
 
 
@@ -62,6 +47,6 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
         }
     }
 
-   // fun getReminder(): Flow<List<ReminderItem>> = mainRepository.getReminder()
+    fun getReminder(): Flow<List<ReminderItem>> = mainRepository.getReminder()
 
 }

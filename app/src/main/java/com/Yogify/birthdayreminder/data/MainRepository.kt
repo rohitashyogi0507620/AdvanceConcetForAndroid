@@ -3,6 +3,7 @@ package com.Yogify.birthdayreminder.data
 import androidx.annotation.WorkerThread
 import com.Yogify.birthdayreminder.db.DataDAO
 import com.Yogify.birthdayreminder.model.ReminderItem
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(private val dataDAO: DataDAO) {
@@ -35,8 +36,8 @@ class MainRepository @Inject constructor(private val dataDAO: DataDAO) {
     }
 
 
-//    fun getReminder(): Flow<List<ReminderItem>> {
-//        return dataDAO.getReminder()
-//    }
+    fun getReminder(): Flow<List<ReminderItem>> {
+        return dataDAO.getReminder()
+    }
 
 }

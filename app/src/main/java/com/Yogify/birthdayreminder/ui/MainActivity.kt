@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -69,15 +70,18 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
 //        }
 
 
-
-        adapter = Adpter()
+        //adapter = Adpter()
         //  binding.layoutSearch.rvSearch.layoutManager = LinearLayoutManager(this)
         // binding.layoutSearch.rvSearch.adapter = adapter
 
         reminderAdpter = ReminderAdpter()
-        binding.rvReminder.layoutManager = LinearLayoutManager(this)
         binding.rvReminder.adapter = reminderAdpter
+        reminderAdpter.setOnItemClickListener(object : ReminderAdpter.OnItemClickListner {
+            override fun onItemClick(item: ReminderItem) {
+                mainViewModel.deleteReminder(item)
+            }
 
+        })
         binding.mainFbAdd.setOnClickListener {
             var list = mutableListOf<ReminderItem>()
 
@@ -91,8 +95,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                     "8451",
                     "7611920581",
                     "Your Birthday is very special for me",
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme1) and 0x00ffffff),
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme1_1) and 0x00ffffff),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme1
+                        ) and 0x00ffffff
+                    ),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme1_1
+                        ) and 0x00ffffff
+                    ),
                     "1",
                     true,
                     "",
@@ -110,8 +122,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                     "8451",
                     "7611920581",
                     "Your Birthday is very special for me",
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme2) and 0x00ffffff),
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme2_2) and 0x00ffffff),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme2
+                        ) and 0x00ffffff
+                    ),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme2_2
+                        ) and 0x00ffffff
+                    ),
 
                     "1",
                     true,
@@ -130,8 +150,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                     "8451",
                     "7611920581",
                     "Your Birthday is very special for me",
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme3) and 0x00ffffff),
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme3_3) and 0x00ffffff),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme3
+                        ) and 0x00ffffff
+                    ),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme3_3
+                        ) and 0x00ffffff
+                    ),
 
                     "1",
                     true,
@@ -150,8 +178,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                     "8451",
                     "7611920581",
                     "Your Birthday is very special for me",
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme4) and 0x00ffffff),
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme4_4) and 0x00ffffff),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme4
+                        ) and 0x00ffffff
+                    ),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme4_4
+                        ) and 0x00ffffff
+                    ),
 
                     "1",
                     true,
@@ -170,8 +206,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                     "8451",
                     "7611920581",
                     "Your Birthday is very special for me",
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme5) and 0x00ffffff),
-                    getString(R.string.hash) + Integer.toHexString(ContextCompat.getColor(this, R.color.colortheme5_5) and 0x00ffffff),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme5
+                        ) and 0x00ffffff
+                    ),
+                    getString(R.string.hash) + Integer.toHexString(
+                        ContextCompat.getColor(
+                            this, R.color.colortheme5_5
+                        ) and 0x00ffffff
+                    ),
 
                     "1",
                     true,
@@ -184,42 +228,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
             mainViewModel.insertReminder(list)
         }
 
-
         mainViewModel.insertReminder.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
 
-        mainViewModel.reminderlist.observe(this, Observer {
-            Log.d("DATA", it.toString())
-        })
-
-
-        val adapter = MainAdapter()
-        binding.rvReminder.adapter = adapter.withLoadStateFooter(
-            MainLoadStateAdapter()
-        )
-
-        adapter.setOnItemClickListener(object : MainAdapter.OnItemClickListner {
-            override fun onItemClick(item: ReminderItem) {
-                mainViewModel.deleteReminder(item)
-            }
-
-        })
-
-        lifecycleScope.launch {
-            mainViewModel.reminderList.collectLatest {
-                adapter.submitData(it)
+        lifecycle.coroutineScope.launch {
+            mainViewModel.getReminder().collect() {
+                Log.d("DATA", it.toString())
+                reminderAdpter.submitList(it)
             }
         }
-
-
-//        lifecycle.coroutineScope.launch {
-//            mainViewModel.getReminder().collect() {
-//                Log.d("DATA",it.toString())
-//                adapter.submitList(it)
-//                reminderAdpter.submitList(it)
-//            }
-//        }
 
 
     }
