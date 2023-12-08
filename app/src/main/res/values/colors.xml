@@ -3,32 +3,20 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="md_theme_light_surface">#E0F7FA</color>
+    <color name="md_theme_light_surface">#03090A</color>
+
+    //Background to all views  use for this color ?android:colorBackground
     <color name="mmd_theme_on_backgroud">#FFFFFF</color>
 
-    <color name="md_theme_light_primary">#B2EBF2</color>
-    <color name="md_theme_light_onPrimary">#E0F7FA</color>
+    //Color Primary of app ?colorPrimary
+    <color name="md_theme_light_primary">#B39DDB</color>
+    // Color colorOnPrimary of app ?colorOnPrimary
+    <color name="md_theme_light_onPrimary">#7E57C2</color>
 
-    <color name="md_theme_light_onPrimaryContainer">#A270FE</color>
-
-
-    <color name="md_theme_light_primaryContainer">#EADDFF</color>
     <color name="md_theme_light_error">#B3261E</color>
     <color name="md_theme_light_onError">#FFFFFF</color>
     <color name="md_theme_light_errorContainer">#F9DEDC</color>
     <color name="md_theme_light_onErrorContainer">#410E0B</color>
-    <color name="md_theme_light_onSurface">#1C1B1F</color>
-    <color name="md_theme_light_surfaceVariant">#E7E0EC</color>
-    <color name="md_theme_dark_primary">#D0BCFF</color>
-    <color name="md_theme_dark_onPrimary">#381E72</color>
-    <color name="md_theme_dark_primaryContainer">#4F378B</color>
-    <color name="md_theme_dark_onPrimaryContainer">#EADDFF</color>
-    <color name="md_theme_dark_secondary">#CCC2DC</color>
-    <color name="md_theme_dark_onSecondary">#332D41</color>
-    <color name="md_theme_dark_secondaryContainer">#4A4458</color>
-    <color name="md_theme_dark_onSurface">#E6E1E5</color>
-    <color name="md_theme_dark_surfaceVariant">#49454F</color>
-
 
     <color name="notification_indicator">#EF5350</color>
     <color name="heading_color">#454545</color>
@@ -36,8 +24,13 @@
     <color name="smallsubheading_color">#606060</color>
 
 
+    <color name="hint_Color_EditText">@color/hint_text_color</color>
+    <color name="color_inputlayout_error">@color/design_default_color_error</color>
+    <color name="hint_text_color">#484848</color>
+    <color name="color_unselect">#B2B2B2</color>
 
-    <color name="colortheme1">#FAEED1</color>
+
+    <color name="colortheme1">#FAEDD0</color>
     <color name="colortheme2">#E5D4FF</color>
     <color name="colortheme3">#FFE5E5</color>
     <color name="colortheme4">#A5F1E9</color>
@@ -50,7 +43,7 @@
     <color name="colortheme11">#FAAB78</color>
     <color name="colortheme12">#ECE8DD</color>
 
-    <color name="colortheme1_1">#FCDE95</color>
+    <color name="colortheme1_1">#CCA54F</color>
     <color name="colortheme2_2">#BC90FF</color>
     <color name="colortheme3_3">#FEA2A2</color>
     <color name="colortheme4_4">#5EE1D3</color>
@@ -62,7 +55,7 @@
     <color name="colortheme10_10">#ECB25B</color>
     <color name="colortheme11_11">#D17D47</color>
     <color name="colortheme12_12">#B1AB9C</color>
-
+    <color name="switch_off_color">#D9DEEA</color>
 
 
 </resources>

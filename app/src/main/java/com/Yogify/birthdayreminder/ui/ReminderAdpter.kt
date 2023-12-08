@@ -2,6 +2,7 @@ package com.Yogify.birthdayreminder.ui
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -11,6 +12,7 @@ import com.Yogify.birthdayreminder.databinding.LayoutReminderGridBinding
 import com.Yogify.birthdayreminder.databinding.LayoutReminderListBinding
 import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.util.utils
+import com.Yogify.birthdayreminder.util.utils.Companion.DATE_dd_MMMM
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
@@ -70,8 +72,8 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
         holder.binding.apply {
             txtName.text = "${item?.name}"
             txtWish.text = "${item?.wish}"
-            txtDateTime.text = utils.datetoFormate(item?.date!!)
-            Glide.with(imgProfile.context).load(item?.imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
+            txtDateTime.text = utils.datetoFormate(item?.date!!, DATE_dd_MMMM)
+            Glide.with(imgProfile.context).load(item?.bitmap).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
             txtName.setTextColor(Color.parseColor(item?.colorDark))
             txtWish.setTextColor(Color.parseColor(item?.colorDark))
             txtDateTime.setTextColor(Color.parseColor(item?.colorDark))

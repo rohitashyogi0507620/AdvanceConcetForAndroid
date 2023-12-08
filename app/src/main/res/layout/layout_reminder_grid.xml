@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     style="@style/CardView_Reminder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/colortheme1"
     app:strokeColor="@color/colortheme1_1"
-    app:strokeWidth="@dimen/card_stroke_radious"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    app:strokeWidth="@dimen/card_stroke_radious">
 
     <RelativeLayout
         android:id="@+id/rl_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
-            android:layout_margin="@dimen/margin_10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
             android:orientation="vertical"
             android:padding="@dimen/margin_10dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_profile"
-                android:padding="@dimen/margin_5dp"
-                android:layout_centerHorizontal="true"
                 android:layout_width="@dimen/card_img_size"
                 android:layout_height="@dimen/card_img_size"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
+                android:padding="@dimen/margin_5dp"
                 android:scaleType="centerCrop"
-                app:strokeWidth="@dimen/card_stroke_radious"
-                app:strokeColor="@color/colortheme1_1"
-                app:shapeAppearanceOverlay="@style/Round_Image"
                 android:src="@drawable/ic_profile_demo"
-                 />
+                app:shapeAppearanceOverlay="@style/Round_Image"
+                app:strokeColor="@color/colortheme1_1"
+                app:strokeWidth="@dimen/card_stroke_radious" />
 
 
             <ImageView
                 android:id="@+id/img_delete"
-                app:tint="@color/colortheme1_1"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_delete" />
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_more"
+                app:tint="@color/colortheme1_1" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_name"
@@ -56,6 +56,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txt_date_time"
+                android:backgroundTint="@color/colortheme1_1"
                 style="@style/TextAppearance_subheading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

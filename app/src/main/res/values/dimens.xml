@@ -8,6 +8,10 @@
     <dimen name="card_img_size">100dp</dimen>
     <dimen name="margin_5dp">5dp</dimen>
     <dimen name="card_stroke_radious">2dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="add_img_size">120dp</dimen>
+    <dimen name="switch_button_thumbsize">26dp</dimen>
+    <dimen name="switch_button_tracksize">26dp</dimen>
 
 
 </resources>

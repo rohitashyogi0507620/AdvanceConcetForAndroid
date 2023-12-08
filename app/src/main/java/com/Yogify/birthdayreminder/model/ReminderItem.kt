@@ -1,5 +1,6 @@
 package com.Yogify.birthdayreminder.model
 
+import android.graphics.Bitmap
 import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,18 +11,18 @@ import java.util.Date
 @Keep
 data class ReminderItem(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    var imageUrl: String,
+    val bitmap: Bitmap?=null,
     var name: String,
-    var gender: String,
+    var gender: Int,
     var date: Date,
     var time: String,
     var mobileNumber: String,
     var wish: String,
     var colorLight: String,
     var colorDark: String,
-    var type: String,
+    var type: Int,
     var isNotify: Boolean,
-    var notifyType: String,
+    var notifyType: Int,
     var isTextMessage: Boolean,
     var isWhatsappMessage: Boolean,
 )

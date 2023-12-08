@@ -22,10 +22,10 @@
     </style>
 
     <style name="CardView_Reminder">
-        <item name="cardBackgroundColor">?colorPrimary</item>
         <item name="cardCornerRadius">@dimen/cardview_corner</item>
         <item name="cardElevation">@dimen/cardview_elevation</item>
         <item name="cardUseCompatPadding">true</item>
+
     </style>
 
     <style name="Round_Image">
@@ -35,6 +35,71 @@
         <item name="strokeColor">@color/md_theme_light_primary</item>
     </style>
 
+    <style name="EditTextOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/TextInputLayout_Rounded</item>
+        <item name="boxStrokeWidth">@dimen/border_1dp</item>
+        <item name="boxStrokeColor">?colorPrimary</item>
+        <item name="boxStrokeErrorColor">?colorError</item>
+        <item name="boxStrokeWidthFocused">@dimen/border_2dp</item>
+        <item name="hintTextColor">@color/hint_Color_EditText</item>
+        <item name="android:layout_margin">@dimen/margin_10dp</item>
+        <item name="android:elevation">@dimen/margin_5dp</item>
+    </style>
+
+    <style name="EditText_Style_Normal" parent="TextAppearance.AppCompat">
+        <item name="android:padding">@dimen/margin_15dp</item>
+        <item name="cornerRadius">@dimen/button_corner_8dp</item>
+        <item name="android:textColor">@color/heading_color</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/heading_text_size</item>
+    </style>
+
+    <style name="TextInputLayout_Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/button_corner_8dp</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+
+        <item name="android:background">@drawable/radiobutton_background</item>
+        <item name="buttonTint">?colorPrimary</item>
+        <item name="android:paddingEnd">@dimen/margin_10dp</item>
+        <item name="android:paddingStart">@dimen/margin_10dp</item>
+        <item name="android:paddingTop">@dimen/margin_12dp</item>
+        <item name="android:paddingBottom">@dimen/margin_12dp</item>
+        <item name="android:textColor">@color/heading_color</item>
+        <item name="android:button">@drawable/radiobutton_insert</item>
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/heading_text_size</item>
+        <item name="android:elevation">@dimen/margin_5dp</item>
+        <item name="android:layout_margin">@dimen/margin_5dp</item>
+
+    </style>
+
+
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="chipStrokeWidth">@dimen/border_1dp</item>
+        <item name="fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">@dimen/subheading_text_size</item>
+        <item name="chipCornerRadius">@dimen/margin_10dp</item>
+        <item name="android:elevation">@dimen/margin_3dp</item>
+        <item name="chipStartPadding">@dimen/margin_10dp</item>
+        <item name="chipEndPadding">@dimen/margin_10dp</item>
+        <item name="android:layout_marginStart">@dimen/margin_5dp</item>
+    </style>
+
+
     <dimen name="cardview_corner">15dp</dimen>
-    <dimen name="cardview_elevation">5dp</dimen>
+    <dimen name="cardview_elevation">6dp</dimen>
+    <dimen name="border_1dp">1dp</dimen>
+    <dimen name="border_2dp">2dp</dimen>
+    <dimen name="button_corner_8dp">8dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+    <dimen name="margin_12dp">12dp</dimen>
+    <dimen name="chip_corner_40dp">40dp</dimen>
+    <dimen name="margin_3dp">3dp</dimen>
+
 </resources>

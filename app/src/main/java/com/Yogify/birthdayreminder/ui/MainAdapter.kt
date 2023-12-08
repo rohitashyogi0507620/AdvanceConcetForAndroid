@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.Yogify.birthdayreminder.databinding.LayoutReminderGridBinding
 import com.Yogify.birthdayreminder.model.ReminderItem
+import com.Yogify.birthdayreminder.util.utils.Companion.DATE_dd_MMMM
 import com.Yogify.birthdayreminder.util.utils.Companion.datetoFormate
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -73,17 +74,16 @@ class MainAdapter : PagingDataAdapter<ReminderItem, MainAdapter.MainViewHolder>(
         holder.binding.apply {
             txtName.text = "${item?.name}"
             txtWish.text = "${item?.wish}"
-            txtDateTime.text = datetoFormate(item?.date!!)
-            Glide.with(imgProfile.context).load(item?.imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
+            txtDateTime.text = datetoFormate(item?.date!!, DATE_dd_MMMM)
+            Glide.with(imgProfile.context).load(item?.bitmap).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
             txtName.setTextColor(Color.parseColor(item?.colorDark))
-            txtWish.setTextColor(Color.parseColor(item?.colorDark))
+          //  txtWish.setTextColor(Color.parseColor(item?.colorDark))
             txtDateTime.setTextColor(Color.parseColor(item?.colorDark))
 
             cardView.setCardBackgroundColor(Color.parseColor(item?.colorLight))
             cardView.strokeColor=Color.parseColor(item?.colorDark)
             imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item?.colorDark))
             imgDelete.setColorFilter(Color.parseColor(item?.colorDark))
-
 
 
 

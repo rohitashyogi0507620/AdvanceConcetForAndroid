@@ -56,4 +56,23 @@
     <string name="select_date">Select Date</string>
     <string name="select_time">Select Time</string>
     <string name="hash">#</string>
+    <string name="color">Color</string>
+    <string name="delete">Delete</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="date_of_birth">Date Of Birth *</string>
+    <string name="time_of_birth">Time Of Birth </string>
+    <string name="name">Name *</string>
+    <string name="mobilenumber">Mobile Number</string>
+    <string name="BestWisheMessage">Best Wishes / Message</string>
+    <string name="permission_info">Please allow permission first to process</string>
+    <string name="reminder_type">Reminder Type</string>
+    <string name="same_day">On Same Day</string>
+    <string name="before_seven_day">Before 7 Day</string>
+    <string name="before_one_month">Before 1 Month</string>
+    <string name="all_type">All Type</string>
+    <string name="notification_type">Notification Type</string>
+    <string name="reminder_birthday">Birthday</string>
+    <string name="reminder_anniversary">Anniversary</string>
+    <string name="reminder_other">Other</string>
 </resources>
