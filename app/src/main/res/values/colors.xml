@@ -5,7 +5,7 @@
 
     <color name="md_theme_light_surface">#03090A</color>
 
-    //Background to all views  use for this color ?android:colorBackground
+    //Background to all views use for this color ?android:colorBackground
     <color name="mmd_theme_on_backgroud">#FFFFFF</color>
 
     //Color Primary of app ?colorPrimary
@@ -28,34 +28,40 @@
     <color name="color_inputlayout_error">@color/design_default_color_error</color>
     <color name="hint_text_color">#484848</color>
     <color name="color_unselect">#B2B2B2</color>
-
-
-    <color name="colortheme1">#FAEDD0</color>
-    <color name="colortheme2">#E5D4FF</color>
-    <color name="colortheme3">#FFE5E5</color>
-    <color name="colortheme4">#A5F1E9</color>
-    <color name="colortheme5">#FFEEF4</color>
-    <color name="colortheme6">#F3BCC8</color>
-    <color name="colortheme7">#EEEEEE</color>
-    <color name="colortheme8">#D7E9B9</color>
-    <color name="colortheme9">#FFFBAC</color>
-    <color name="colortheme10">#FFD495</color>
-    <color name="colortheme11">#FAAB78</color>
-    <color name="colortheme12">#ECE8DD</color>
-
-    <color name="colortheme1_1">#CCA54F</color>
-    <color name="colortheme2_2">#BC90FF</color>
-    <color name="colortheme3_3">#FEA2A2</color>
-    <color name="colortheme4_4">#5EE1D3</color>
-    <color name="colortheme5_5">#FFABC8</color>
-    <color name="colortheme6_6">#E17E94</color>
-    <color name="colortheme7_7">#D0CECE</color>
-    <color name="colortheme8_8">#B5D67F</color>
-    <color name="colortheme9_9">#E3DD6E</color>
-    <color name="colortheme10_10">#ECB25B</color>
-    <color name="colortheme11_11">#D17D47</color>
-    <color name="colortheme12_12">#B1AB9C</color>
     <color name="switch_off_color">#D9DEEA</color>
+
+
+
+    <string-array name="colorThemeLight">
+        <item name="colortheme1">#FAEDD0</item>
+        <item name="colortheme2">#E5D4FF</item>
+        <item name="colortheme3">#FFE5E5</item>
+        <item name="colortheme4">#A5F1E9</item>
+        <item name="colortheme5">#FFEEF4</item>
+        <item name="colortheme6">#F3BCC8</item>
+        <item name="colortheme7">#EEEEEE</item>
+        <item name="colortheme8">#D7E9B9</item>
+        <item name="colortheme9">#FFFBAC</item>
+        <item name="colortheme10">#FFD495</item>
+        <item name="colortheme11">#FAAB78</item>
+        <item name="colortheme12">#ECE8DD</item>
+    </string-array>
+
+
+    <string-array name="colorThemeDark">
+        <item name="colortheme1_1">#CCA54F</item>
+        <item name="colortheme2_2">#BC90FF</item>
+        <item name="colortheme3_3">#FEA2A2</item>
+        <item name="colortheme4_4">#5EE1D3</item>
+        <item name="colortheme5_5">#FFABC8</item>
+        <item name="colortheme6_6">#E17E94</item>
+        <item name="colortheme7_7">#D0CECE</item>
+        <item name="colortheme8_8">#B5D67F</item>
+        <item name="colortheme9_9">#E3DD6E</item>
+        <item name="colortheme10_10">#ECB25B</item>
+        <item name="colortheme11_11">#D17D47</item>
+        <item name="colortheme12_12">#B1AB9C</item>
+    </string-array>
 
 
 </resources>

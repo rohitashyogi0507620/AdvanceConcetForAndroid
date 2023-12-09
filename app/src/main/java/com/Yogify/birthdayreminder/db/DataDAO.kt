@@ -1,12 +1,17 @@
 package com.Yogify.birthdayreminder.db
 
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.Yogify.birthdayreminder.model.ReminderItem
 import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface DataDAO {
 
+
+    @RawQuery
+    fun checkpoint(supportSQLiteQuery: SupportSQLiteQuery): Int
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertReminder(reminderItem: ReminderItem)
 

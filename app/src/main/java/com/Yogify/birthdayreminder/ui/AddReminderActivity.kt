@@ -29,6 +29,7 @@ import com.Yogify.birthdayreminder.util.utils.Companion.REMINDER_TYPE_BIRTHDAY
 import com.Yogify.birthdayreminder.util.utils.Companion.REMINDER_TYPE_OTHER
 import com.Yogify.birthdayreminder.util.utils.Companion.cameraStoragePermission
 import com.Yogify.birthdayreminder.util.utils.Companion.checkNotificationPermission
+import com.Yogify.birthdayreminder.util.utils.Companion.colorTheme
 import com.Yogify.birthdayreminder.util.utils.Companion.getBitmapFromUri
 import com.Yogify.birthdayreminder.util.utils.Companion.getDateToLong
 import com.Yogify.birthdayreminder.util.utils.Companion.getLongtoFormate
@@ -55,6 +56,8 @@ class AddReminderActivity : BaseActivity() {
     var reminderType: Int = 0
     var notificationType: Int = 0
     var gender: Int = 1
+    val colorAdpter = ColorAdpter()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +69,10 @@ class AddReminderActivity : BaseActivity() {
         if (!checkNotificationPermission(applicationContext)) requestNotificationPermission.launch(
             Manifest.permission.POST_NOTIFICATIONS
         )
+
+
+        binding.addReminderColorList.adapter = colorAdpter
+        colorAdpter.submitList(colorTheme(applicationContext))
 
 
         // set Max Min Date
@@ -159,16 +166,8 @@ class AddReminderActivity : BaseActivity() {
                     "12:51",
                     binding.addReminderContact.text.toString().trim(),
                     binding.addReminderWish.text.toString().trim(),
-                    getString(R.string.hash) + Integer.toHexString(
-                        ContextCompat.getColor(
-                            this, R.color.colortheme8
-                        ) and 0x00ffffff
-                    ),
-                    getString(R.string.hash) + Integer.toHexString(
-                        ContextCompat.getColor(
-                            this, R.color.colortheme8_8
-                        ) and 0x00ffffff
-                    ),
+                    colorAdpter.getItem().colorLight,
+                    colorAdpter.getItem().colorDark,
                     reminderType,
                     true,
                     notificationType,
@@ -180,6 +179,7 @@ class AddReminderActivity : BaseActivity() {
         }
 
         binding.productSwitchbtn.setOnClickListener {
+            Log.d("Color",colorAdpter.getItem().toString())
         }
 
         binding.addReminderTime.setOnClickListener {

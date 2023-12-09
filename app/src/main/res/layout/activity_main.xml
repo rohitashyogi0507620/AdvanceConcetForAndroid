@@ -34,12 +34,26 @@
             android:layout_below="@id/app_bar_layout"
             android:orientation="vertical">
 
+            <Button
+                android:visibility="gone"
+                android:id="@+id/backup"
+                android:text="BackUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:visibility="gone"
+                android:id="@+id/restore"
+                android:text="Restore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_reminder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutAnimation="@anim/layout_animation"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="2"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:itemCount="5"
                 tools:listitem="@layout/layout_reminder_list" />

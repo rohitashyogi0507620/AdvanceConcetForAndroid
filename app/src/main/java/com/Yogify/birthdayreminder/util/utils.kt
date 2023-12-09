@@ -4,12 +4,15 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.View
 import androidx.core.app.ActivityCompat
+import com.Yogify.birthdayreminder.R
+import com.Yogify.birthdayreminder.model.ThemeColor
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 import java.text.DateFormat
@@ -53,7 +56,7 @@ class utils {
         }
 
 
-        private fun getbase65String(context: Context,uri: Uri): String? {
+        private fun getbase65String(context: Context, uri: Uri): String? {
             var bitmap = getBitmapFromUri(context, uri)
             val byteArrayOutputStream = ByteArrayOutputStream()
             bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
@@ -84,6 +87,7 @@ class utils {
 
             return Bitmap.createScaledBitmap(image, scaleWidth, scaleHeight, false)
         }
+
         fun cameraStoragePermission(): Array<String> {
             var permissionStorage: String
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -91,13 +95,29 @@ class utils {
             } else {
                 permissionStorage = Manifest.permission.READ_EXTERNAL_STORAGE
             }
-            return arrayOf(Manifest.permission.CAMERA, permissionStorage)
+            return arrayOf(
+                Manifest.permission.CAMERA,
+                permissionStorage,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
 
         }
 
 
         fun showSnackbar(view: View, text: String) {
             Snackbar.make(view, text, Snackbar.LENGTH_LONG).show()
+        }
+
+        fun colorTheme(context: Context): ArrayList<ThemeColor> {
+
+            var themeColor = arrayListOf<ThemeColor>()
+            var colorLight = context.getResources().getStringArray(R.array.colorThemeLight)
+            var colorDark = context.getResources().getStringArray(R.array.colorThemeDark)
+
+            colorLight.forEachIndexed { index, s ->
+                themeColor.add(ThemeColor(colorLight.get(index), colorDark.get(index)))
+            }
+            return themeColor
         }
 
 

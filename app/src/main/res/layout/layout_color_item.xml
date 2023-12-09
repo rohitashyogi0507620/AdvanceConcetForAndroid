@@ -1,0 +1,21 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_color"
+    style="@style/CardView_Reminder"
+    android:layout_width="@dimen/color_card"
+    android:layout_height="@dimen/color_card"
+    android:orientation="vertical"
+    app:strokeColor="?colorOnPrimary"
+    app:strokeWidth="@dimen/card_stroke_radious">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/ll_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_color_selector"
+        android:orientation="vertical" />
+
+
+</com.google.android.material.card.MaterialCardView>

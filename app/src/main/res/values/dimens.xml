@@ -12,6 +12,7 @@
     <dimen name="add_img_size">120dp</dimen>
     <dimen name="switch_button_thumbsize">26dp</dimen>
     <dimen name="switch_button_tracksize">26dp</dimen>
+    <dimen name="color_card">100dp</dimen>
 
 
 </resources>

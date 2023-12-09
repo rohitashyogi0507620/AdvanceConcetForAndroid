@@ -2,6 +2,7 @@ package com.Yogify.birthdayreminder.db
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.Yogify.birthdayreminder.db.DataBaseConstant.REMINDER_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -18,12 +19,13 @@ class DatabaseModule {
         return appDatabase.dataDao()
     }
 
+
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java, REMINDER_DATABASE
-        ).build()
+        ).setJournalMode(RoomDatabase.JournalMode.TRUNCATE).allowMainThreadQueries().build()
     }
 }

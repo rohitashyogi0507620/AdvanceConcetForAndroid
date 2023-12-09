@@ -1,15 +1,16 @@
 package com.Yogify.birthdayreminder.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Environment
 import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
@@ -17,17 +18,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.Yogify.birthdayreminder.R
 import com.Yogify.birthdayreminder.databinding.ActivityMainBinding
+import com.Yogify.birthdayreminder.db.DataBaseConstant.DATABASE_NAME_WITH_FORMAT
 import com.Yogify.birthdayreminder.model.ReminderItem
-import com.Yogify.birthdayreminder.util.utils
-import com.Yogify.birthdayreminder.util.utils.Companion.getDateToLong
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 
 
 @AndroidEntryPoint
@@ -35,7 +36,7 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
     lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var adapter: Adpter
+    private lateinit var adapter: ColorAdpter
     private lateinit var reminderAdpter: ReminderAdpter
     val SPEECH_REQUEST_CODE = 0
     var LAYOUT_TYPE = 0
@@ -94,6 +95,16 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
                 Log.d("DATA", it.toString())
                 reminderAdpter.submitList(it)
             }
+        }
+
+
+        binding.backup.setOnClickListener {
+           mainViewModel.backupDatabase(applicationContext)
+          //  exportDatabaseFile(applicationContext)
+        }
+        binding.restore.setOnClickListener {
+            mainViewModel.restoreDatabase(applicationContext)
+           // importDatabaseFile(applicationContext)
         }
 
 
@@ -184,5 +195,62 @@ class MainActivity : BaseActivity(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
         }
     }
+
+
+    fun exportDatabaseFile(context: Context) {
+        try {
+            copyDataFromOneToAnother(
+                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT).path,
+                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT
+            )
+//            copyDataFromOneToAnother(
+//                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT + "-shm").path,
+//                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT + "-shm"
+//            )
+//            copyDataFromOneToAnother(
+//                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT + "-wal").path,
+//                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT + "-wal"
+//            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun importDatabaseFile(context: Context) {
+        try {
+            copyDataFromOneToAnother(
+                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT,
+                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT).path
+            )
+//            copyDataFromOneToAnother(
+//                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT + "-shm",
+//                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT + "-shm").path
+//            )
+//            copyDataFromOneToAnother(
+//                Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + DATABASE_NAME_WITH_FORMAT + "-wal",
+//                context.getDatabasePath(DATABASE_NAME_WITH_FORMAT + "-wal").path
+//            )
+            val i = context.packageManager.getLaunchIntentForPackage(context.packageName)
+            i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            context.startActivity(i)
+            System.exit(0)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun copyDataFromOneToAnother(fromPath: String, toPath: String) {
+        val inStream = File(fromPath).inputStream()
+        val outStream = FileOutputStream(toPath)
+        inStream.use { input ->
+            outStream.use { output ->
+                input.copyTo(output)
+            }
+        }
+        inStream.close()
+        outStream.close();
+    }
+
 
 }
