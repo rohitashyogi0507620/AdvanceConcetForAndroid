@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_profile"
+        android:layout_width="@dimen/add_img_size"
+        android:layout_height="@dimen/add_img_size"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:padding="@dimen/margin_5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_demo"
+        app:shapeAppearanceOverlay="@style/Round_Image"
+        app:strokeColor="?colorOnPrimary"
+        app:strokeWidth="@dimen/card_stroke_radious" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login With Google" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnlogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRevokeAccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAccessDrive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get All Files" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnuploadFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="uploadFileToGDrive" />
+
+    <TextView
+        android:id="@+id/accountData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
+</LinearLayout>

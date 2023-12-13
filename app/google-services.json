@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "578355732525",
+    "firebase_url": "https://birthday-reminder-f3eec-default-rtdb.firebaseio.com",
+    "project_id": "birthday-reminder-f3eec",
+    "storage_bucket": "birthday-reminder-f3eec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578355732525:android:a80fe962f721598de018a4",
+        "android_client_info": {
+          "package_name": "com.Yogify.birthdayreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578355732525-3ftvs007vtcbqtv0png7qpjq1nq6k1dl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Yogify.birthdayreminder",
+            "certificate_hash": "939fb214e0d8da7bcada8400e58ec8c7f004cb20"
+          }
+        },
+        {
+          "client_id": "578355732525-3j7iom4j01241r99c8ilmngh2fco99ji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Yogify.birthdayreminder",
+            "certificate_hash": "4ed3755b3fe4fc1f8a23c2619c724b6587e21678"
+          }
+        },
+        {
+          "client_id": "578355732525-h9rn5fsvgvephmddeus8lt8t0kqob28n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Yogify.birthdayreminder",
+            "certificate_hash": "b8469339914d234701d29d56214805bdc4d6f47b"
+          }
+        },
+        {
+          "client_id": "578355732525-o1qdkb1c1gn3u6jbl0pguiujd8f89bal.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Yogify.birthdayreminder",
+            "certificate_hash": "89f04df9cd9200c1393d69615f75301aba58c05c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2cDFuaVA9T7FMzBG4wQy3S1NpPjA1lXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

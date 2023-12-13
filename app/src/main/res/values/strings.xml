@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AdvanceConcetForAndroid</string>
+    <string name="app_name">Birthday Reminder</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -60,8 +60,8 @@
     <string name="delete">Delete</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="date_of_birth">Date Of Birth *</string>
-    <string name="time_of_birth">Time Of Birth </string>
+    <string name="date_of_birth">Date *</string>
+    <string name="time_of_birth">Time </string>
     <string name="name">Name *</string>
     <string name="mobilenumber">Mobile Number</string>
     <string name="BestWisheMessage">Best Wishes / Message</string>
@@ -75,4 +75,18 @@
     <string name="reminder_birthday">Birthday</string>
     <string name="reminder_anniversary">Anniversary</string>
     <string name="reminder_other">Other</string>
+    <string name="send_text_sms">Auto Wish On Text Message</string>
+    <string name="send_whatsapp_sms">Auto Wish On Whatsapp</string>
+    <string name="submit">Submit</string>
+    <string name="reminderaddedsuccessfully">Reminder Added Successfully</string>
+    <string name="edit">Edit</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="showqrcode">Show Qr Code</string>
+    <string name="scan">Scan</string>
+    <string name="remindercontentNotFound">Reminder Not Found . Please Scan Correct QR Code</string>
+    <string name="logoutsuccessfully">Logout Successfuly</string>
+    <string name="accountDeleted">Account Deleted Successfully</string>
 </resources>

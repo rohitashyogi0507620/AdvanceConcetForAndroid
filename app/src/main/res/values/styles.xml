@@ -16,6 +16,16 @@
         <item name="android:maxLines">3</item>
     </style>
 
+    <style name="TextAppearance_Switch">
+        <item name="android:textColor">@color/subheading_color</item>
+        <item name="android:textSize">@dimen/switch_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/margin_5dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
     <style name="TextAppearance_smallsubheading">
         <item name="android:textColor">@color/smallsubheading_color</item>
         <item name="android:textSize">@dimen/smallsubheading_text_size</item>
@@ -38,7 +48,7 @@
     <style name="EditTextOutline" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="shapeAppearanceOverlay">@style/TextInputLayout_Rounded</item>
         <item name="boxStrokeWidth">@dimen/border_1dp</item>
-        <item name="boxStrokeColor">?colorPrimary</item>
+        <item name="boxStrokeColor">@color/stroke_color</item>
         <item name="boxStrokeErrorColor">?colorError</item>
         <item name="boxStrokeWidthFocused">@dimen/border_2dp</item>
         <item name="hintTextColor">@color/hint_Color_EditText</item>
@@ -52,6 +62,7 @@
         <item name="android:textColor">@color/heading_color</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/heading_text_size</item>
+        <item name="android:lines">1</item>
     </style>
 
     <style name="TextInputLayout_Rounded" parent="">
@@ -72,7 +83,6 @@
         <item name="fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/heading_text_size</item>
         <item name="android:elevation">@dimen/margin_5dp</item>
-        <item name="android:layout_margin">@dimen/margin_5dp</item>
 
     </style>
 
@@ -84,11 +94,49 @@
         <item name="chipStrokeWidth">@dimen/border_1dp</item>
         <item name="fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">@dimen/subheading_text_size</item>
-        <item name="chipCornerRadius">@dimen/margin_10dp</item>
+        <item name="chipCornerRadius">@dimen/button_corner_8dp</item>
         <item name="android:elevation">@dimen/margin_3dp</item>
         <item name="chipStartPadding">@dimen/margin_10dp</item>
         <item name="chipEndPadding">@dimen/margin_10dp</item>
         <item name="android:layout_marginStart">@dimen/margin_5dp</item>
+    </style>
+
+    <style name="CardThemeColor">
+        <item name="cardCornerRadius">@dimen/button_corner_8dp</item>
+        <item name="cardElevation">@dimen/margin_5dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="strokeWidth">@dimen/card_stroke_radious</item>
+        <item name="strokeColor">@color/color_unselect</item>
+    </style>
+
+    <style name="CardThemeSwitchButton">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="cardCornerRadius">@dimen/button_corner_8dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="strokeWidth">@dimen/border_1dp</item>
+        <item name="strokeColor">@color/color_unselect</item>
+    </style>
+
+    <style name="StyleButton">
+<!--        <item name="strokeWidth">@dimen/border_2dp</item>-->
+<!--        <item name="strokeColor">?colorOnPrimary</item>-->
+        <item name="cornerRadius">@dimen/button_corner_8dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+        <item name="android:padding">@dimen/margin_10dp</item>
+        <item name="backgroundTint">?colorPrimary</item>
+        <item name="android:layout_margin">@dimen/margin_10dp</item>
+    </style>
+
+
+    <style name="BottomSheetDialogtheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetstyle</item>
+
+    </style>
+
+    <style name="BottomSheetstyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+
     </style>
 
 

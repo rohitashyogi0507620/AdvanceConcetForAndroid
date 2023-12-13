@@ -13,6 +13,7 @@ import com.Yogify.birthdayreminder.db.DataBaseConstant
 import com.Yogify.birthdayreminder.db.DataBaseConstant.REMINDER_DATABASE
 import com.Yogify.birthdayreminder.db.DataDAO
 import com.Yogify.birthdayreminder.model.ReminderItem
+import com.Yogify.birthdayreminder.util.utils.Companion.databasePath
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 import java.io.IOException
@@ -33,13 +34,13 @@ class MainRepository @Inject constructor(
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertReminder(reminderItem: ReminderItem) {
+    suspend fun insertReminder(reminderItem: ReminderItem):Long {
         return dataDAO.insertReminder(reminderItem)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertReminder(reminderItem: List<ReminderItem>) {
+    suspend fun insertReminder(reminderItem: List<ReminderItem>):List<Long> {
         return dataDAO.insertReminder(reminderItem)
     }
 
@@ -60,23 +61,17 @@ class MainRepository @Inject constructor(
         return dataDAO.getReminder()
     }
 
-    fun checkPoint() {
-        dataDAO.checkpoint((SimpleSQLiteQuery("pragma wal_checkpoint(full)")))
-    }
-
     fun backupDatabase(context: Context): Int {
         var result = -99
         if (instance == null) return result
-        val dbFile = context.getDatabasePath(DataBaseConstant.REMINDER_DATABASE)
-        // val bkpFile = File(dbFile.path + DataBaseConstant.DATABASE_BACKUP_SUFFIX)
-        val bkpFile =
-            File(Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + REMINDER_DATABASE)
+        val dbFile = context.getDatabasePath(REMINDER_DATABASE)
+        val backupFile = File(databasePath(context))
         Log.d("PATH", dbFile.path.toString())
-        Log.d("PATH", bkpFile.path.toString())
-        if (bkpFile.exists()) bkpFile.delete()
+        Log.d("PATH", backupFile.path.toString())
+        if (backupFile.exists()) backupFile.delete()
         checkpoint()
         try {
-            dbFile.copyTo(bkpFile, true)
+            dbFile.copyTo(backupFile, true)
             result = 0
         } catch (e: IOException) {
             e.printStackTrace()
@@ -85,19 +80,21 @@ class MainRepository @Inject constructor(
     }
 
     fun restoreDatabase(context: Context, restart: Boolean = true) {
-        if (File(Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + REMINDER_DATABASE).exists()) {
+        val backupFile = File(databasePath(context))
+        if (backupFile.exists()) {
             if (instance == null) return
             val dbpath = appDatabase.openHelper.readableDatabase.path
             val dbFile = File(dbpath)
-            val bkpFile =
-                File(Environment.getExternalStorageDirectory().path + "/Download/" + "backup_" + REMINDER_DATABASE)
             try {
-                bkpFile.copyTo(dbFile, true)
+                backupFile.copyTo(dbFile, true)
                 checkpoint()
+                val i = context.packageManager.getLaunchIntentForPackage(context.packageName)
+                i!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                context.startActivity(i)
+                System.exit(0)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
         }
     }
 

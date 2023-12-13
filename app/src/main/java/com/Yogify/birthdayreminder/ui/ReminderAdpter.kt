@@ -1,20 +1,29 @@
 package com.Yogify.birthdayreminder.ui
 
+import android.R
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.Yogify.birthdayreminder.databinding.LayoutReminderGridBinding
-import com.Yogify.birthdayreminder.databinding.LayoutReminderListBinding
 import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.util.utils
 import com.Yogify.birthdayreminder.util.utils.Companion.DATE_dd_MMMM
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+
 
 class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
 
@@ -24,7 +33,7 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
 
 
     interface OnItemClickListner {
-        fun onItemClick(item: ReminderItem)
+        fun onItemClick(view: View, type: Int, item: ReminderItem)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListner) {
@@ -38,6 +47,7 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
     fun setOnItemLOngClickListener(listener: OnItemLongClickListner) {
         mlonglistner = listener
     }
+
     inner class ViewHolder(val binding: LayoutReminderGridBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -73,21 +83,51 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
             txtName.text = "${item?.name}"
             txtWish.text = "${item?.wish}"
             txtDateTime.text = utils.datetoFormate(item?.date!!, DATE_dd_MMMM)
-            Glide.with(imgProfile.context).load(item?.bitmap).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
-            txtName.setTextColor(Color.parseColor(item?.colorDark))
-            txtWish.setTextColor(Color.parseColor(item?.colorDark))
-            txtDateTime.setTextColor(Color.parseColor(item?.colorDark))
 
-            cardView.setCardBackgroundColor(Color.parseColor(item?.colorLight))
-            cardView.strokeColor= Color.parseColor(item?.colorDark)
+            txtName.setTextColor(Color.parseColor(item.colorDark))
+            txtWish.setTextColor(Color.parseColor(item.colorDark))
+            txtDateTime.setTextColor(Color.parseColor(item.colorDark))
+
+            cardView.setCardBackgroundColor(Color.parseColor(item.colorLight))
+            cardView.strokeColor = Color.parseColor(item.colorDark)
             imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item?.colorDark))
             imgDelete.setColorFilter(Color.parseColor(item?.colorDark))
 
 
+//            Glide.with(imgProfile.context).asBitmap().load("https://drive.google.com/uc?id=1T-GhZwnKo2kefgKVV6zImrb341qRIkTs&export=download")
+//                .error(com.Yogify.birthdayreminder.R.drawable.ic_profile_demo).centerCrop()
+//                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+//                .listener(object : RequestListener<Bitmap?> {
+//                    override fun onLoadFailed(
+//                        e: GlideException?,
+//                        model: Any?,
+//                        target: Target<Bitmap?>?,
+//                        isFirstResource: Boolean
+//                    ): Boolean {
+//                        Log.d("IMAGEERROR",e.toString())
+//                        return false
+//                    }
+//
+//                    override fun onResourceReady(
+//                        resource: Bitmap?,
+//                        model: Any?,
+//                        target: Target<Bitmap?>?,
+//                        dataSource: DataSource?,
+//                        isFirstResource: Boolean
+//                    ): Boolean {
+//                        imgProfile.setImageBitmap(resource)
+//                        return true
+//                    }
+//                }).submit()
+
+
+            Glide.with(imgProfile.context).load(item.imageUri).centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .error(com.Yogify.birthdayreminder.R.drawable.ic_profile_demo).into(imgProfile)
 
 
             imgDelete.setOnClickListener {
-                mlistner.onItemClick(item!!)
+                mlistner.onItemClick(it, 1, item)
             }
         }
 

@@ -1,29 +1,41 @@
 package com.Yogify.birthdayreminder.util
 
 import android.Manifest
+import android.app.DownloadManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import com.Yogify.birthdayreminder.R
+import com.Yogify.birthdayreminder.db.DataBaseConstant.REMINDER_DATABASE
+import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.model.ThemeColor
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.io.ByteArrayOutputStream
-import java.text.DateFormat
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
+
 
 class utils {
 
     companion object {
 
-        const val DATE_dd_MMM_yyyy = "dd-MMM-yyyy"
+        const val DATE_DD_MMM_YYY = "dd MMM yyyy"
         const val DATE_dd_MMMM = "dd MMMM"
         const val DATE_dd_MMMM_YYYY = "dd MMMM YYYY"
         const val REMINDER_TYPE_BIRTHDAY = 1
@@ -35,6 +47,13 @@ class utils {
         const val NOTIFICATION_TYPE_ONE_MONTH = 4
         const val GENDER_MALE = 1
         const val GENDER_FEMALE = 0
+        const val DOWNLOAD_FOLDER = "Download"
+        const val PICTURES_FOLDER = "Pictures"
+        const val SLASH = "/"
+        const val IMAGE_JPEG = ".jpeg"
+        const val QR_DATA = "QRDATA"
+        const val IMAGE_URL = "IMAGEURL"
+        const val REMINDER_ID = "REMINDERID"
 
 
         fun getDateToLong(value: String, formate: String): Date {
@@ -55,15 +74,25 @@ class utils {
             return format.format(date)
         }
 
-
-        private fun getbase65String(context: Context, uri: Uri): String? {
-            var bitmap = getBitmapFromUri(context, uri)
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            bitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-            return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.NO_WRAP)
+        fun getDateToString(date: Date,formate: String):String{
+            val format = SimpleDateFormat(formate)
+            return format.format(date)
         }
 
-        fun getBitmapFromUri(context: Context, uri: Uri): Bitmap {
+
+        fun getbase65String(bitmap: Bitmap): String? {
+            try {
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
+                return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.NO_WRAP)
+
+            } catch (e: Exception) {
+                return null
+            }
+
+        }
+
+        fun getBitmapFromUri(context: Context, uri: Uri): Bitmap? {
             var bitmap: Bitmap? = null
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri)
@@ -72,7 +101,7 @@ class utils {
                 e.printStackTrace()
                 bitmap = null
             }
-            return bitmap!!
+            return bitmap
         }
 
         fun resizeImage(image: Bitmap): Bitmap {
@@ -80,10 +109,10 @@ class utils {
             val width = image.width
             val height = image.height
 
-            val scaleWidth = width / 4
-            val scaleHeight = height / 4
+            val scaleWidth = width / 2
+            val scaleHeight = height / 2
 
-            if (image.byteCount <= 1000000) return image
+            if (image.byteCount <= 100000) return image
 
             return Bitmap.createScaledBitmap(image, scaleWidth, scaleHeight, false)
         }
@@ -96,9 +125,9 @@ class utils {
                 permissionStorage = Manifest.permission.READ_EXTERNAL_STORAGE
             }
             return arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA,
-                permissionStorage,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                permissionStorage
             )
 
         }
@@ -136,7 +165,67 @@ class utils {
             }
         }
 
+        fun saveImageintoStorage(bmp: Bitmap, name: String, path: String): String? {
 
+            try {
+                var fileName = name.replace(" ", "")
+                val parentFile = File(path)
+                if (!parentFile.exists()) {
+                    parentFile.mkdirs()
+                }
+                val imageFile = File(parentFile, fileName)
+                var out: FileOutputStream? = null
+                out = FileOutputStream(imageFile)
+                bmp.compress(Bitmap.CompressFormat.JPEG, 30, out)
+                out.close()
+                Log.d("PATH", imageFile.absolutePath)
+                return imageFile.absolutePath
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                return null
+            }
+        }
+
+        fun appfolderPath(context: Context): String {
+            return Environment.getExternalStorageDirectory().absolutePath + File.separator + Environment.DIRECTORY_DOWNLOADS + File.separator + context.getString(
+                R.string.app_name
+            )
+        }
+
+        fun imageFolderPath(context: Context): String {
+            return appfolderPath(context) + File.separator + PICTURES_FOLDER
+        }
+
+        fun databasePath(context: Context): String {
+            return appfolderPath(context) + File.separator + REMINDER_DATABASE
+
+        }
+
+        fun showQrcode(text: String): Bitmap? {
+            var mWriter = MultiFormatWriter();
+            try {
+                var mMatrix = mWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+                var mEncoder = BarcodeEncoder()
+                return mEncoder.createBitmap(mMatrix)
+            } catch (e: Exception) {
+                return null
+            }
+        }
+
+        fun stringToReminderDataObject(data: String): ReminderItem? {
+            try {
+                var reminderItem: ReminderItem = Gson().fromJson(
+                    data, object : TypeToken<ReminderItem>() {}.type
+                )
+                return reminderItem
+            } catch (e: Exception) {
+                return null
+            }
+        }
+
+        fun reminderDataObjectToString(item: ReminderItem): String {
+            return Gson().toJson(item)
+        }
     }
 
 }

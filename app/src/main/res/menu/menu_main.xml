@@ -13,7 +13,7 @@
         android:title="@string/gifts"
         app:showAsAction="always" />
     <item
-        android:id="@+id/walletFragment"
+        android:id="@+id/storeFragment"
         android:icon="@drawable/ic_store_animation"
         android:title="@string/store"
         app:showAsAction="always" />

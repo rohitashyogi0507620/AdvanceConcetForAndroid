@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.allViews
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,8 @@ class ColorAdpter : RecyclerView.Adapter<ColorAdpter.ViewHolder>() {
 
     private var selectedPosition = 0
 
+    val _themeColor = MutableLiveData<ThemeColor>()
+    val themeColor = _themeColor
     inner class ViewHolder(val binding: LayoutColorItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -50,6 +53,7 @@ class ColorAdpter : RecyclerView.Adapter<ColorAdpter.ViewHolder>() {
 
         holder.binding.cardColor.setCardBackgroundColor(Color.parseColor(item?.colorLight))
         holder.binding.cardColor.strokeColor = Color.parseColor(item?.colorDark)
+        _themeColor.postValue(differ.currentList[selectedPosition])
 
         if (selectedPosition === position) {
             holder.itemView.isSelected = true
@@ -59,12 +63,10 @@ class ColorAdpter : RecyclerView.Adapter<ColorAdpter.ViewHolder>() {
         holder.binding.cardColor.setOnClickListener {
             if (selectedPosition >= 0) notifyItemChanged(selectedPosition)
             selectedPosition = holder.adapterPosition
+            _themeColor.postValue(differ.currentList[selectedPosition])
             notifyItemChanged(selectedPosition)
         }
 
     }
 
-    fun getItem():ThemeColor{
-        return differ.currentList[selectedPosition]
-    }
 }

@@ -3,6 +3,7 @@ package com.Yogify.birthdayreminder.model
 import android.graphics.Bitmap
 import androidx.annotation.Keep
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.Yogify.birthdayreminder.db.DataBaseConstant.REMINDER_TABLE
 import java.util.Date
@@ -11,7 +12,8 @@ import java.util.Date
 @Keep
 data class ReminderItem(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val bitmap: Bitmap?=null,
+    var imageUriPath: String,
+    var imageWebUriPath: String,
     var name: String,
     var gender: Int,
     var date: Date,
@@ -24,5 +26,7 @@ data class ReminderItem(
     var isNotify: Boolean,
     var notifyType: Int,
     var isTextMessage: Boolean,
-    var isWhatsappMessage: Boolean,
-)
+    var isWhatsappMessage: Boolean
+){
+    @Ignore var imageUri: String = if (imageUriPath.isNullOrEmpty()) imageWebUriPath else imageUriPath
+}

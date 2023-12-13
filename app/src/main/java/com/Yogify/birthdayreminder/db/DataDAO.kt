@@ -13,16 +13,22 @@ interface DataDAO {
     @RawQuery
     fun checkpoint(supportSQLiteQuery: SupportSQLiteQuery): Int
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertReminder(reminderItem: ReminderItem)
+    suspend fun insertReminder(reminderItem: ReminderItem):Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertReminder(entities: List<ReminderItem>)
+    fun insertReminder(entities: List<ReminderItem>):List<Long>
 
     @Delete
     suspend fun deleteReminder(reminderItem: ReminderItem)
 
     @Update
     suspend fun updateReminder(reminderItem: ReminderItem)
+
+//    @Query("UPDATE REMINDER_TABLE SET imageWebUriPath = :imageWebUrl  WHERE id = :id")
+//    fun updateImageWrbUrl(id: String, imageWebUrl: String)String
+
+    @Query("UPDATE REMINDER_TABLE SET imageWebUriPath = :imageWebUrl  WHERE rowid = :id")
+    fun updateImageWrbUrl(id: String, imageWebUrl: String)
 
     @Query("select * from REMINDER_TABLE ORDER BY date DESC")
     fun getReminder():Flow<List<ReminderItem>>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AddReminderActivity">
@@ -16,15 +17,13 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_hint"
-            app:menu="@menu/menu_add_reminder"
-            app:navigationIcon="@drawable/ic_back_arrow" />
+            app:menu="@menu/menu_add_reminder" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/birthdaypage_scrollbar"
+        android:id="@+id/scroll_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/app_bar_layout"
@@ -91,6 +90,8 @@
                             style="@style/RadioButtonStyle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_5dp"
+                            android:layout_marginRight="@dimen/margin_10dp"
                             android:layout_weight="1"
                             android:checked="true"
                             android:text="@string/male" />
@@ -100,7 +101,7 @@
                             style="@style/RadioButtonStyle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/margin_5dp"
+                            android:layout_marginLeft="@dimen/margin_10dp"
                             android:layout_marginRight="@dimen/margin_5dp"
                             android:layout_weight="1"
                             android:checked="false"
@@ -110,44 +111,54 @@
 
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/EditTextOutline"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/add_reminder_dob"
-                        style="@style/EditText_Style_Normal"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/EditTextOutline"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_calender"
-                        android:drawablePadding="@dimen/margin_5dp"
-                        android:drawableTint="?colorPrimary"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/date_of_birth" />
+                        android:layout_weight="1">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/add_reminder_dob"
+                            style="@style/EditText_Style_Normal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_calender"
+                            android:drawablePadding="@dimen/margin_5dp"
+                            android:drawableTint="?colorPrimary"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/date_of_birth" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/EditTextOutline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/add_reminder_time"
-                        style="@style/EditText_Style_Normal"
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/EditTextOutline"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_time"
-                        android:drawablePadding="@dimen/margin_5dp"
-                        android:drawableTint="?colorPrimary"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/time_of_birth"
-                        android:inputType="date" />
+                        android:layout_weight="1">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/add_reminder_time"
+                            style="@style/EditText_Style_Normal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_time"
+                            android:drawablePadding="@dimen/margin_5dp"
+                            android:drawableTint="?colorPrimary"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/time_of_birth"
+                            android:inputType="date" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/EditTextOutline"
@@ -187,6 +198,162 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_10dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardThemeSwitchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/add_reminder_textmessage"
+                        style="@style/TextAppearance_Switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/send_text_sms" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardThemeSwitchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/add_reminder_whatsappmessage"
+                        style="@style/TextAppearance_Switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/send_whatsapp_sms" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardThemeSwitchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="@string/reminder_type" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/add_reminder_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/margin_5dp"
+                            app:checkedChip="@id/add_reminder_birthday"
+                            app:selectionRequired="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_birthday"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/reminder_birthday" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_anniversary"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/reminder_anniversary" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_other"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/reminder_other" />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardThemeSwitchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="@string/notification_type" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/add_reminder_notification_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/margin_5dp"
+                            app:checkedChip="@id/add_reminder_all"
+                            app:selectionRequired="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_all"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/all_type" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_sameday"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/same_day" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_sevenday"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/before_seven_day" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/add_reminder_onemonth"
+                                style="@style/ChipStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/before_one_month" />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_reminder_colorList"
                 android:layout_width="match_parent"
@@ -194,124 +361,16 @@
                 android:layout_below="@id/app_bar_layout"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:spanCount="5"
+                app:spanCount="6"
                 tools:listitem="@layout/layout_color_item" />
 
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_reminder_submit"
+                style="@style/StyleButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_5dp">
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/product_switchbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/TextAppearance_subheading"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:padding="@dimen/margin_10dp"
-                        android:text="@string/reminder_type" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/add_reminder_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_5dp"
-                        android:padding="@dimen/margin_5dp"
-                        app:checkedChip="@id/add_reminder_birthday"
-                        app:selectionRequired="true"
-                        app:singleSelection="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_birthday"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/reminder_birthday" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_anniversary"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/reminder_anniversary" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_other"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/reminder_other" />
-
-
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/TextAppearance_subheading"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="start"
-                        android:padding="@dimen/margin_10dp"
-                        android:text="@string/notification_type" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/add_reminder_notification_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/margin_10dp"
-                        app:checkedChip="@id/add_reminder_all"
-                        app:selectionRequired="true"
-                        app:singleSelection="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_all"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/all_type" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_sameday"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/same_day" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_sevenday"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/before_seven_day" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/add_reminder_onemonth"
-                            style="@style/ChipStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/before_one_month" />
-
-
-                    </com.google.android.material.chip.ChipGroup>
-                </LinearLayout>
-
-            </LinearLayout>
+                android:text="@string/submit"
+                android:textSize="@dimen/switch_text_size" />
 
 
         </LinearLayout>
@@ -319,15 +378,12 @@
 
     </androidx.core.widget.NestedScrollView>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bnt_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/margin_20dp"
-        android:src="@drawable/ic_right" />
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressbar"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

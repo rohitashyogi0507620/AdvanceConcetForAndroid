@@ -75,7 +75,7 @@ class MainAdapter : PagingDataAdapter<ReminderItem, MainAdapter.MainViewHolder>(
             txtName.text = "${item?.name}"
             txtWish.text = "${item?.wish}"
             txtDateTime.text = datetoFormate(item?.date!!, DATE_dd_MMMM)
-            Glide.with(imgProfile.context).load(item?.bitmap).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
+            //Glide.with(imgProfile.context).load(item?.bitmap).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.5f).into(imgProfile)
             txtName.setTextColor(Color.parseColor(item?.colorDark))
           //  txtWish.setTextColor(Color.parseColor(item?.colorDark))
             txtDateTime.setTextColor(Color.parseColor(item?.colorDark))
