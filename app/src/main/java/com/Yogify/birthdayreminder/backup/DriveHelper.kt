@@ -19,7 +19,6 @@ import java.io.IOException
 class DriveHelper(var drive: Drive) {
 
 
-
     fun createFolder(foldername: String): String {
 
         var folderid = folderId(foldername)
@@ -108,17 +107,19 @@ class DriveHelper(var drive: Drive) {
             val fileMetadata = File()
             fileMetadata.name = Uri.parse(filepath).lastPathSegment.toString()
             fileMetadata.parents = listOf(folderid)
-            fileMetadata.webViewLink
+            var imageId = imageFileId(fileMetadata.name)
+            if (!imageId.isNullOrEmpty()) {
+                deleteFile(imageId)
+            }
             val filePath = java.io.File(filepath)
-            filePath.name
             val mediaContent = FileContent("image/jpeg", filePath)
             var file: File? = null
             try {
                 file = drive.files().create(fileMetadata, mediaContent)
                     .setFields("id,name,webContentLink,webViewLink").execute()
                 weburl = file.webContentLink
-                Log.d("FILEURL",file.webContentLink)
-                Log.d("FILEURL",file.webViewLink)
+                Log.d("FILEURL", file.webContentLink)
+                Log.d("FILEURL", file.webViewLink)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -151,8 +152,8 @@ class DriveHelper(var drive: Drive) {
         return folderid
     }
 
-    fun imageFileId(foldername: String): String? {
-        var folderid = ""
+    fun imageFileId(imagename: String): String? {
+        var fileid = ""
         var pageToken: String? = null
         do {
             var result: FileList? = null
@@ -162,8 +163,8 @@ class DriveHelper(var drive: Drive) {
                 for (file in result.files) {
                     System.out.printf("Found file: %s (%s)\n", file.name, file.id)
                     for (i in 0 until result.size) {
-                        if (file.name == foldername) {
-                            folderid = file.id
+                        if (file.name == imagename) {
+                            fileid = file.id
                         }
                     }
                 }
@@ -172,32 +173,22 @@ class DriveHelper(var drive: Drive) {
             }
             pageToken = result!!.nextPageToken
         } while (pageToken != null)
-        return folderid
+        return fileid
     }
 
     fun uploadFile(folderid: String, filepath: String, filename: String): Boolean {
         val updated = false
         val fileidtodelete = fileId(filename)
         if (fileidtodelete != "") {
-            deleteFile(drive, fileidtodelete)
+            deleteFile(fileidtodelete)
             UploadCsvFile(folderid, filepath, filename)
         }
         return updated
     }
 
-    fun updateImageFile(folderid: String, filepath: String, filename: String): Boolean {
-        val updated = false
-        val fileidtodelete = fileId(filename)
-        if (fileidtodelete != "") {
-            deleteFile(drive, fileidtodelete)
-            uploadImageFile(folderid, filepath)
-        }
-        return updated
-    }
-
-    fun deleteFile(service: Drive, fileId: String) {
+    fun deleteFile(fileId: String) {
         try {
-            service.files().delete(fileId).execute()
+            drive.files().delete(fileId).execute()
         } catch (e: IOException) {
             e.printStackTrace()
         }

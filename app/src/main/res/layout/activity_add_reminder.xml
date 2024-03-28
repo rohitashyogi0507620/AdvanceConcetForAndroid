@@ -5,7 +5,7 @@
     android:id="@+id/rl_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddReminderActivity">
+    tools:context=".ui.activitys.AddReminderActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -14,10 +14,12 @@
         android:visibility="visible">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/search_bar"
+            android:id="@+id/toolbar_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/menu_add_reminder" />
+            android:soundEffectsEnabled="true"
+            app:menu="@menu/menu_add_reminder"
+            app:title="@string/addreminder" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -114,7 +116,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/EditTextOutline"
@@ -173,8 +176,6 @@
                         android:drawableEnd="@drawable/ic_contact"
                         android:drawablePadding="@dimen/margin_5dp"
                         android:drawableTint="?colorPrimary"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
                         android:hint="@string/mobilenumber" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -367,6 +368,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_reminder_submit"
                 style="@style/StyleButton"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/submit"
@@ -380,10 +382,11 @@
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressbar"
-        android:indeterminate="true"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

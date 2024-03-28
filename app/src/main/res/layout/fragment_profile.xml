@@ -5,55 +5,625 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ProfileFragment">
+    tools:context=".ui.fragments.ProfileFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_profile"
-        android:layout_width="@dimen/add_img_size"
-        android:layout_height="@dimen/add_img_size"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:padding="@dimen/margin_5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_profile_demo"
-        app:shapeAppearanceOverlay="@style/Round_Image"
-        app:strokeColor="?colorOnPrimary"
-        app:strokeWidth="@dimen/card_stroke_radious" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnlogin"
+    <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login With Google" />
+        android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnlogout"
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnlogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRevokeAccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Account" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAccessDrive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get All Files" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnuploadFile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="uploadFileToGDrive" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:scrollIndicators="none"
+        android:scrollbarSize="0dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRevokeAccess"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Account" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAccessDrive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get All Files" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnuploadFile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="uploadFileToGDrive" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/accountData"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:background="@color/zxing_transparent">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            style="@style/CardView_Reminder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:contentPadding="@dimen/margin_10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/margin_5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        style="@style/TextAppearance_Switch"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="?colorOnPrimary"
+                                        android:gravity="start"
+                                        android:text="@string/profile"
+                                        android:textColor="?colorOnPrimary" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_weight=".5"
+                                        android:gravity="right"
+                                        android:padding="15dp"
+                                        android:textSize="15dp"
+                                        android:textStyle="bold"
+                                        android:visibility="invisible"></TextView>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/st_ll_username"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="@dimen/margin_10dp">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_weight=".1"
+                                        android:padding="@dimen/margin_5dp"
+                                        android:src="@drawable/ic_username"
+                                        app:tint="@color/colorIcon"></ImageView>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/st_txt_username"
+                                        style="@style/TextAppearance_Switch_small"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".8"
+                                        android:gravity="start"
+                                        android:text="@string/username" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/st_ll_gmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="@dimen/margin_10dp">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_weight=".1"
+                                        android:padding="@dimen/margin_5dp"
+                                        android:src="@drawable/ic_gmail"></ImageView>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/st_txt_email"
+                                        style="@style/TextAppearance_Switch_small"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".8"
+                                        android:gravity="start"
+                                        android:text="@string/email_account" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="10dp"
+                                    android:visibility="gone">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".1"
+                                        android:padding="5dp"></ImageView>
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".9"
+                                        android:hint="Date of Birth"
+                                        android:padding="5dp"
+                                        android:textSize="18dp"></TextView>
+                                </LinearLayout>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnlogin"
+                                    style="@style/StyleButton"
+                                    android:textSize="@dimen/subheading_text_size"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/login_with_google" />
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardView_Reminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="65dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/st_img_profile"
+                            android:layout_width="@dimen/add_img_size"
+                            android:layout_height="@dimen/add_img_size"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/margin_5dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_profile_demo"
+                            app:shapeAppearanceOverlay="@style/Round_Image"
+                            app:strokeColor="?colorOnPrimary"
+                            app:strokeWidth="@dimen/card_stroke_radious" />
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/st_progress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:indeterminate="true"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardView_Reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="?colorOnPrimary"
+                            android:gravity="start"
+                            android:text="@string/backup"
+                            android:textColor="?colorOnPrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_backupon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:id="@+id/st_img_backupwifi"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_wifi"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/wifionly" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_backup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_backup"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/st_backup"
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/backup" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_backuprestore"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_restore"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/backuprestore" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardView_Reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="?colorOnPrimary"
+                            android:gravity="start"
+                            android:text="@string/notification"
+                            android:textColor="?colorOnPrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_notification_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_notification_type"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/notification_type" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_notification_sound"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_music"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/notification_music" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardView_Reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="?colorOnPrimary"
+                            android:gravity="start"
+                            android:text="@string/aboutUs"
+                            android:textColor="?colorOnPrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_rating"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_rating"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/rating" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_shareapp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_share_app"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/share_app" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_moreapps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_more_apps"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/more_apps" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_developer_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_developer_contact"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/developer_contact" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/st_ll_privecy_policy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/margin_10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight=".1"
+                                android:padding="@dimen/margin_5dp"
+                                android:src="@drawable/ic_privecy_policy"></ImageView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextAppearance_Switch_small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".8"
+                                android:gravity="start"
+                                android:text="@string/privecy_information" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_10dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance_Switch_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:text="@string/version" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/st_txt_versionCode"
+                        style="@style/TextAppearance_Switch_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:text="1.0.0"
+                        android:textColor="?colorOnPrimary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

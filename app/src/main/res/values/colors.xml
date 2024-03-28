@@ -28,11 +28,13 @@
     <color name="color_inputlayout_error">@color/design_default_color_error</color>
     <color name="hint_text_color">#484848</color>
     <color name="color_unselect">#B2B2B2</color>
+    <color name="color_unselect_button">#DEDEDE</color>
     <color name="switch_off_color">#D9DEEA</color>
-
+    <color name="colorIcon">#2D264B</color>
 
 
     <string-array name="colorThemeLight">
+        <item name="colortheme0">#FFFFFF</item>
         <item name="colortheme1">#FAEDD0</item>
         <item name="colortheme2">#E5D4FF</item>
         <item name="colortheme3">#FFE5E5</item>
@@ -49,6 +51,7 @@
 
 
     <string-array name="colorThemeDark">
+        <item name="colortheme0_0">#AAAAAA</item>
         <item name="colortheme1_1">#CCA54F</item>
         <item name="colortheme2_2">#BC90FF</item>
         <item name="colortheme3_3">#FEA2A2</item>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/more_bottomsheet"
+    style="@style/BottomSheetDialogtheme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/background_bottomsheetr"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_name"
+                style="@style/TextAppearance_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="@string/text_hint"
+                android:textColor="?colorOnPrimary" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_days"
+                style="@style/TextAppearance_subheading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="?colorOnPrimary"
+                android:text="Turn 25 in 256 Days"
+                android:textColor="?colorOnPrimary" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_stroke_radious"
+            android:layout_below="@id/ll_top"
+            android:layout_marginTop="10dp"
+            android:background="?colorOnPrimary"></View>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_divider"
+            android:background="?colorSurface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_15dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_date_time"
+                        style="@style/TextAppearance_subheading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="?colorOnPrimary"
+                        android:text="04 July 1998 , 10:50 AM"
+                        android:textColor="?colorOnPrimary" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_wish"
+                        style="@style/TextAppearance_subheading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/text_hint"
+                        android:textColor="?colorOnPrimary" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_profile"
+        android:layout_width="@dimen/add_img_size"
+        android:layout_height="@dimen/add_img_size"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:padding="@dimen/margin_5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_demo"
+        app:shapeAppearanceOverlay="@style/Round_Image"
+        app:strokeColor="?colorOnPrimary"
+        app:strokeWidth="@dimen/card_stroke_radious" />
+
+
+</RelativeLayout>

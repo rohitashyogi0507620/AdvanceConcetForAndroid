@@ -7,7 +7,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.Yogify.birthdayreminder.R
-import com.Yogify.birthdayreminder.db.DataDAO
+import com.Yogify.birthdayreminder.data.db.DataDAO
 import com.Yogify.birthdayreminder.util.utils
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -23,13 +23,8 @@ class DriveWorker @AssistedInject constructor(
     CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        val reminderID = inputData.getString(utils.REMINDER_ID)
+        val reminderID = inputData.getString(utils.REMINDERITEM)
         val imageUrl = inputData.getString(utils.IMAGE_URL)
-        Log.i("MyWorker", "work started")
-        Thread.sleep(5000L) // simulate some work
-        Log.i("MyWorker", "work finished")
-
-        Result.success()
         if (driveHelper != null && dao != null) {
             imageUrl?.let {
                 var folderId = driveHelper?.createFolder(applicationContext.getString(R.string.app_name))

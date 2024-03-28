@@ -1,81 +1,109 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    style="@style/CardView_Reminder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardBackgroundColor="?colorPrimary"
+    app:strokeColor="?colorOnPrimary"
+    app:strokeWidth="@dimen/card_stroke_radious">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view"
-        style="@style/CardView_Reminder"
+
+    <RelativeLayout
+        android:id="@+id/rl_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_10dp">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/b_card_linear_layout"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="@dimen/margin_10dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/b_image_view"
-                android:scaleType="centerCrop"
-                android:layout_width="0dp"
-                app:shapeAppearanceOverlay="@style/Round_Image"
-                android:layout_height="80dp"
+                android:id="@+id/img_profile"
+                android:layout_width="@dimen/card_img_size"
+                android:layout_height="@dimen/card_img_size"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:layout_weight=".4"
-                android:padding="5dp"
-                android:src="@drawable/ic_profile_demo" />
+                android:padding="@dimen/margin_5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_profile_demo"
+                app:shapeAppearanceOverlay="@style/Round_Image"
+                app:strokeColor="?colorOnPrimary"
+                app:strokeWidth="@dimen/card_stroke_radious" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/img_profile"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_name"
                     style="@style/TextAppearance_heading"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:hint="@string/text_hint"
-                    android:maxLines="2" />
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:text="@string/text_hint"
+                    android:textColor="?colorOnPrimary" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_date_time"
+                    style="@style/TextAppearance_subheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:text="21 January"
+                    android:textColor="?colorOnPrimary" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_day_remains"
+                    style="@style/TextAppearance_smallsubheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:text="10 Days Left"
+                    android:textColor="?colorOnPrimary" />
+
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_wish"
                     style="@style/TextAppearance_subheading"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:hint="@string/text_hint"
-                    android:maxLines="6" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_date_time"
-                    style="@style/TextAppearance_smallsubheading"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:hint="@string/text_hint"
-                    android:maxLines="6" />
-
-
+                    android:layout_gravity="center"
+                    android:text="Your birthday is most special movement in my life"
+                    android:textColor="?colorOnPrimary"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/img_delete"
-                android:src="@drawable/ic_delete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_more"
+                app:tint="?colorOnPrimary" />
 
 
         </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
 
-</RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

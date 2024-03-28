@@ -12,6 +12,15 @@
         android:id="@+id/rl_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,40 +51,55 @@
                 app:srcCompat="@drawable/ic_more"
                 app:tint="?colorOnPrimary" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_name"
-                style="@style/TextAppearance_heading"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_profile"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:text="@string/text_hint"
-                android:textColor="?colorOnPrimary" />
+                android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_date_time"
-                android:backgroundTint="?colorOnPrimary"
-                style="@style/TextAppearance_subheading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_name"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:text="21 January"
-                android:textColor="?colorOnPrimary" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_name"
+                    style="@style/TextAppearance_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:text="@string/text_hint"
+                    android:textColor="?colorOnPrimary" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_wish"
-                style="@style/TextAppearance_subheading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_date_time"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:text="Your birthday is most special movement in my life"
-                android:textColor="?colorOnPrimary" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_date_time"
+                    style="@style/TextAppearance_subheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:text="21 January"
+                    android:textColor="?colorOnPrimary" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_day_remains"
+                    style="@style/TextAppearance_smallsubheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:text="10 Days Left"
+                    android:textColor="?colorOnPrimary" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_wish"
+                    style="@style/TextAppearance_subheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Your birthday is most special movement in my life"
+                    android:textColor="?colorOnPrimary"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </RelativeLayout>
-
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

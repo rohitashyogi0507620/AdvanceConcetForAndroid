@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/onlongclick_bottomsheet"
+    android:id="@+id/more_bottomsheet"
     style="@style/BottomSheetDialogtheme"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -46,18 +46,19 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/ll_option"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:id="@+id/menu_option_delete"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
                         android:padding="@dimen/margin_10dp">
 
@@ -81,8 +82,8 @@
                     <LinearLayout
                         android:id="@+id/menu_option_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"                        android:orientation="horizontal"
                         android:padding="@dimen/margin_10dp">
 
                         <ImageView
@@ -103,34 +104,10 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/menu_option_copy"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/margin_10dp">
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight=".1"
-                            android:src="@drawable/ic_copy"></ImageView>
-
-                        <com.google.android.material.textview.MaterialTextView
-                            style="@style/TextAppearance_Switch"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/txt_name"
-                            android:layout_weight=".8"
-                            android:text="@string/copy" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:id="@+id/menu_option_qr"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"                        android:orientation="horizontal"
                         android:padding="@dimen/margin_10dp">
 
                         <ImageView
@@ -151,10 +128,34 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/menu_option_share_whatsapp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_10dp">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight=".1"
+                            android:src="@drawable/ic_whatsapp"></ImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txt_name"
+                            android:layout_weight=".8"
+                            android:text="@string/sharewhatsapp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/menu_option_share"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"                        android:orientation="horizontal"
                         android:padding="@dimen/margin_10dp">
 
                         <ImageView
@@ -176,7 +177,31 @@
 
 
                 </LinearLayout>
-                <include android:visibility="gone" android:id="@+id/ll_qr" layout="@layout/layout_showqr"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_qr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/qr_cancle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/margin_10dp"
+                        android:src="@drawable/ic_cancel" />
+
+                    <ImageView
+                        android:id="@+id/qr_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/margin_10dp" />
+
+                </RelativeLayout>
+
             </RelativeLayout>
         </ScrollView>
 

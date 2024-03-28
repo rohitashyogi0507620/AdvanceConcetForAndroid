@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Profile</string>
+    <string name="store">Store</string>
+    <string name="gifts">Gifts</string>
+    <string name="home">Home</string>
+
+    <string name="hash">#</string>
+    <string name="color">Color</string>
+
+    <string name="app_name">Birthday Reminder</string>
+    <string name="action_settings">समायोजन</string>
+    <string name="next">Next</string>
+    <string name="previous">पहले का</string>
+    <string name="Add">जोड़ना</string>
+    <string name="search_hint">खोज</string>
+    <string name="filter">फ़िल्टर</string>
+    <string name="notification">अधिसूचना</string>
+    <string name="voice_search">आवाज खोज</string>
+    <string name="text_hint">संकेत देना</string>
+    <string name="select_date">तारीख़ चुनें</string>
+    <string name="select_time">समय चुनें</string>
+    <string name="delete">मिटाना</string>
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="date_of_birth">तारीख *</string>
+    <string name="time_of_birth">समय</string>
+    <string name="name">नाम *</string>
+    <string name="mobilenumber">मोबाइल नंबर</string>
+    <string name="BestWisheMessage">शुभकामनाएँ/संदेश</string>
+    <string name="permission_info">कृपया पहले प्रक्रिया करने की अनुमति दें</string>
+    <string name="reminder_type">अनुस्मारक प्रकार</string>
+    <string name="same_day">उसी दिन</string>
+    <string name="before_seven_day">7 दिन से पहले</string>
+    <string name="before_one_month">1 महीने से पहले</string>
+    <string name="all_type">सभी प्रकार</string>
+    <string name="notification_type">जानकारी प्रकार</string>
+    <string name="reminder_birthday">जन्मदिन</string>
+    <string name="reminder_anniversary">सालगिरह</string>
+    <string name="reminder_other">अन्य</string>
+    <string name="send_text_sms">टेक्स्ट संदेश पर ऑटो विश</string>
+    <string name="send_whatsapp_sms">व्हाट्सएप पर ऑटो विश</string>
+    <string name="submit">Submit</string>
+    <string name="reminderaddedsuccessfully">अनुस्मारक सफलतापूर्वक जोड़ा गया</string>
+    <string name="reminderupdatedsuccessfully">अनुस्मारक सफलतापूर्वक अद्यतन किया गया</string>
+    <string name="edit">संपादन करना</string>
+    <string name="copy">नकल</string>
+    <string name="share">शेयर करना</string>
+    <string name="showqrcode">Qr कोड दिखाएँ</string>
+    <string name="scan">स्कैन</string>
+    <string name="remindercontentNotFound">अनुस्मारक नहीं मिला. कृपया सही क्यूआर कोड स्कैन करें</string>
+    <string name="logoutsuccessfully">सफलतापूर्वक लॉगआउट करें</string>
+    <string name="accountDeleted">खाता सफलतापूर्वक हटा दिया गया</string>
+    <string name="language">भाषा</string>
+    <string name="addreminder">अनुस्मारक जोड़ें</string>
+
+
+</resources>

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.Yogify.birthdayreminder.ui.MainActivity">
+    tools:context="com.Yogify.birthdayreminder.ui.activitys.MainActivity">
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home_animation"
@@ -11,12 +11,15 @@
         android:id="@+id/giftsFragment"
         android:icon="@drawable/ic_gift_animation"
         android:title="@string/gifts"
+        android:visible="false"
         app:showAsAction="always" />
     <item
         android:id="@+id/storeFragment"
         android:icon="@drawable/ic_store_animation"
         android:title="@string/store"
+        android:visible="false"
         app:showAsAction="always" />
+
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile_animation"

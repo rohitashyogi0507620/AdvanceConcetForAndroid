@@ -5,11 +5,15 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.graphics.RectF
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LOGGER
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.ZoomSuggestionOptions
+import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
 class QrCodeAnalyzer(
@@ -28,7 +32,7 @@ class QrCodeAnalyzer(
     private fun translateX(x: Float) = x * scaleX
     private fun translateY(y: Float) = y * scaleY
 
-    private val _barcodeData = MutableLiveData<String>()
+    private val _barcodeData = MutableLiveData<String?>()
     val barcodeData = _barcodeData
 
     private fun adjustBoundingRect(rect: Rect) = RectF(
@@ -53,18 +57,18 @@ class QrCodeAnalyzer(
         image.close()
     }
 
-    fun processsWithBitmap(bitmap: Bitmap) {
-        val inputImage = InputImage.fromBitmap(bitmap, 0)
-        processImage(inputImage)
-
+    fun processImage(bitmap: Bitmap) {
+        val image = InputImage.fromBitmap(bitmap, 0)
+        processImage(image)
     }
 
-    private fun processImage(inputImage: InputImage) {
-        // Process image searching for barcodes
-        val options = BarcodeScannerOptions.Builder().build()
+    fun processImage(inputImage: InputImage) {
+
+        val options = BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+            .build()
 
         val scanner = BarcodeScanning.getClient(options)
-
         scanner.process(inputImage).addOnSuccessListener { barcodes ->
             if (barcodes.isNotEmpty()) {
                 for (barcode in barcodes) {
@@ -81,8 +85,12 @@ class QrCodeAnalyzer(
                 }
             } else {
                 // Remove bounding rect
+                Log.d("SCANOBJECT","NOTFOUND")
+                _barcodeData.postValue(null)
                 barcodeBoxView.setRect(RectF())
             }
-        }.addOnFailureListener { }
+        }.addOnFailureListener {
+            it.printStackTrace()
+        }
     }
 }

@@ -26,12 +26,23 @@
         <item name="android:textAlignment">textStart</item>
     </style>
 
+    <style name="TextAppearance_Switch_small">
+        <item name="android:textColor">@color/subheading_color</item>
+        <item name="android:textSize">@dimen/subheading_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/margin_5dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
     <style name="TextAppearance_smallsubheading">
         <item name="android:textColor">@color/smallsubheading_color</item>
         <item name="android:textSize">@dimen/smallsubheading_text_size</item>
     </style>
 
     <style name="CardView_Reminder">
+        <item name="cardBackgroundColor">?colorSurface</item>
         <item name="cardCornerRadius">@dimen/cardview_corner</item>
         <item name="cardElevation">@dimen/cardview_elevation</item>
         <item name="cardUseCompatPadding">true</item>
@@ -126,6 +137,7 @@
         <item name="android:padding">@dimen/margin_10dp</item>
         <item name="backgroundTint">?colorPrimary</item>
         <item name="android:layout_margin">@dimen/margin_10dp</item>
+        <item name="android:textSize">@dimen/switch_text_size</item>
     </style>
 
 
