@@ -88,4 +88,9 @@
     <string name="email_account">Email Account</string>
     <string name="login_with_google">Login With Google</string>
     <string name="shareapp_message">" Hey i am very happy to share this app with you this app remind you about birthday and keep Notes Safe with Google Drive Security check this app"</string>
+    <string name="theme">Theme</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="auto_theme">Auto</string>
+    <string name="dynamic_theme">Dynamic</string>
 </resources>

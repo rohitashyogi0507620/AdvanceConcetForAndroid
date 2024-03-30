@@ -4,117 +4,327 @@
     android:id="@+id/more_bottomsheet"
     style="@style/BottomSheetDialogtheme"
     android:layout_width="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
     <RelativeLayout
-        android:id="@+id/rl_background"
+        android:layout_above="@id/ll_optionmenu"
+        style="@style/BottomSheetDialogtheme"
+        android:id="@+id/more_bottomsheet_more"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="65dp"
-        android:background="@drawable/background_bottomsheetr"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/ll_top"
+        <RelativeLayout
+            android:id="@+id/rl_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/background_bottomsheetr"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_name"
-                style="@style/TextAppearance_heading"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_top"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:text="@string/text_hint"
-                android:textColor="?colorOnPrimary" />
+                android:layout_marginTop="80dp"
+                android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txt_days"
-                style="@style/TextAppearance_subheading"
-                android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_name"
+                    style="@style/TextAppearance_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:text="@string/text_hint"
+                    android:textColor="?colorOnPrimary" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_days"
+                    style="@style/TextAppearance_subheading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:maxLines="3"
+                    android:text="Turn 25 in 256 Days"
+                    android:textColor="?colorOnPrimary" />
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/seprate_line"
+                android:layout_below="@id/ll_top"
+                android:layout_marginTop="10dp"
+                android:background="?colorOnPrimary"></View>
+
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="?colorOnPrimary"
-                android:text="Turn 25 in 256 Days"
-                android:textColor="?colorOnPrimary" />
+                android:layout_below="@id/view_divider"
+                android:background="?colorSurface">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/ll_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_15dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/txt_date_time"
+                                style="@style/TextAppearance_subheading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:backgroundTint="?colorOnPrimary"
+                                android:maxLines="3"
+                                android:text="04 July 1998 , 10:50 AM"
+                                android:textColor="?colorOnPrimary" />
 
 
-        </LinearLayout>
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/txt_wish"
+                                style="@style/TextAppearance_subheading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/text_hint"
+                                android:textColor="?colorOnPrimary" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_qr"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/qr_cancle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="@dimen/margin_10dp"
+                            android:src="@drawable/ic_cancel"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/qr_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_centerInParent="true"
+                            android:padding="@dimen/margin_10dp" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/add_img_size"
+            android:layout_height="@dimen/add_img_size"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin_5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile_demo"
+            app:shapeAppearanceOverlay="@style/Round_Image"
+            app:strokeColor="?colorOnPrimary"
+            app:strokeWidth="@dimen/profile_stroke_radious" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_optionmenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="?colorSurface"
+        android:orientation="vertical">
 
         <View
-            android:id="@+id/view_divider"
+            android:id="@+id/view_divider_below"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/card_stroke_radious"
-            android:layout_below="@id/ll_top"
-            android:layout_marginTop="10dp"
+            android:layout_height="@dimen/seprate_line"
             android:background="?colorOnPrimary"></View>
 
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/view_divider"
-            android:background="?colorSurface">
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_10dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/menu_option_delete"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="@dimen/margin_15dp">
+                    android:padding="@dimen/margin_10dp">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_date_time"
-                        style="@style/TextAppearance_subheading"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/img_delete_option"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:backgroundTint="?colorOnPrimary"
-                        android:text="04 July 1998 , 10:50 AM"
-                        android:textColor="?colorOnPrimary" />
-
+                        android:background="@drawable/optionitem_background"
+                        android:padding="@dimen/margin_15dp"
+                        android:src="@drawable/ic_delete"></ImageView>
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_wish"
-                        style="@style/TextAppearance_subheading"
-                        android:layout_width="match_parent"
+                        style="@style/TextAppearance_subheading_small"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/text_hint"
-                        android:textColor="?colorOnPrimary" />
+                        android:layout_below="@id/txt_name"
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:text="@string/delete" />
+
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/menu_option_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_10dp">
+
+                    <ImageView
+                        android:id="@+id/img_edit_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/optionitem_background"
+                        android:padding="@dimen/margin_15dp"
+                        android:src="@drawable/ic_edit"></ImageView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance_subheading_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_name"
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:text="@string/edit" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_option_qr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_10dp">
+
+                    <ImageView
+                        android:id="@+id/img_qrcode_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/optionitem_background"
+                        android:padding="@dimen/margin_15dp"
+                        android:src="@drawable/ic_qr"></ImageView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance_subheading_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_name"
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:text="QR Code" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_option_share_whatsapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_10dp">
+
+                    <ImageView
+                        android:id="@+id/img_whatsapp_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/optionitem_background"
+                        android:padding="@dimen/margin_15dp"
+                        android:src="@drawable/ic_whatsapp"></ImageView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance_subheading_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_name"
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:gravity="center"
+                        android:text="WhatsApp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/menu_option_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_10dp">
+
+                    <ImageView
+                        android:id="@+id/img_share_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/optionitem_background"
+                        android:padding="@dimen/margin_15dp"
+                        android:src="@drawable/ic_share"></ImageView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance_subheading_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_name"
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:text="@string/share" />
+
+                </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
 
+        </HorizontalScrollView>
 
-    </RelativeLayout>
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_profile"
-        android:layout_width="@dimen/add_img_size"
-        android:layout_height="@dimen/add_img_size"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:padding="@dimen/margin_5dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_profile_demo"
-        app:shapeAppearanceOverlay="@style/Round_Image"
-        app:strokeColor="?colorOnPrimary"
-        app:strokeWidth="@dimen/card_stroke_radious" />
+    </LinearLayout>
 
 
 </RelativeLayout>

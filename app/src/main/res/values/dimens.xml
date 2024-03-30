@@ -18,6 +18,8 @@
     <dimen name="slider_size">250dp</dimen>
     <dimen name="margin_25dp">25dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
+    <dimen name="profile_stroke_radious">4dp</dimen>
+    <dimen name="seprate_line">2dp</dimen>
 
 
 </resources>

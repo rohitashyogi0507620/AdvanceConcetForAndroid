@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import com.Yogify.birthdayreminder.R
 import com.Yogify.birthdayreminder.backup.DriveHelper
@@ -22,11 +23,16 @@ import com.Yogify.birthdayreminder.ui.viewmodels.MainViewModel
 import com.Yogify.birthdayreminder.util.Constants.ABOUT_DEVELOPER
 import com.Yogify.birthdayreminder.util.Constants.PRIVECY_POLICY
 import com.Yogify.birthdayreminder.util.utils
+import com.Yogify.birthdayreminder.util.utils.Companion.THEME_AUTO
+import com.Yogify.birthdayreminder.util.utils.Companion.THEME_DARK
+import com.Yogify.birthdayreminder.util.utils.Companion.THEME_DYNAMIC
+import com.Yogify.birthdayreminder.util.utils.Companion.THEME_LIGHT
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.material.color.DynamicColors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,6 +54,8 @@ class ProfileFragment : BaseFragment() {
     @set:Inject
     @Nullable
     var driveHelper: DriveHelper? = null
+
+    var themeType = THEME_AUTO
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -110,6 +118,43 @@ class ProfileFragment : BaseFragment() {
             privecyPolicy()
         }
 
+        binding.chipgroupTheme.setOnCheckedChangeListener { group, checkedId ->
+
+            if (checkedId.equals(R.id.auto_theme)) {
+                themeType = utils.THEME_AUTO
+            } else if (checkedId.equals(R.id.light_theme)) {
+                themeType = utils.THEME_LIGHT
+            } else if (checkedId.equals(R.id.dark_theme)) {
+                themeType = utils.THEME_DARK
+            } else if (checkedId.equals(R.id.dynamic_theme)) {
+                themeType = utils.THEME_DYNAMIC
+            }
+            updateApplicationTheme()
+
+        }
+
+    }
+
+    private fun updateApplicationTheme() {
+        when (themeType) {
+            THEME_AUTO -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_TIME)
+            }
+
+            THEME_LIGHT -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
+            THEME_DARK -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+
+            THEME_DYNAMIC -> {
+                DynamicColors.applyToActivitiesIfAvailable(requireActivity().application)
+            }
+
+        }
+
     }
 
     private fun moreApps() {
@@ -146,7 +191,8 @@ class ProfileFragment : BaseFragment() {
             shareIntent.setType("text/plain")
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name))
             var shareMessage = resources.getString(R.string.shareapp_message)
-            shareMessage = "${shareMessage} https://play.google.com/store/apps/details?id=${requireContext().packageName}"
+            shareMessage =
+                "${shareMessage} https://play.google.com/store/apps/details?id=${requireContext().packageName}"
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
             startActivity(Intent.createChooser(shareIntent, "Share with"))
         } catch (e: Exception) {

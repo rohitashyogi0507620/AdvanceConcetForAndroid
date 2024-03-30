@@ -21,6 +21,7 @@ import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -43,6 +44,7 @@ import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.ui.activitys.AddReminderActivity
 import com.Yogify.birthdayreminder.ui.activitys.BarCodeScanerActivity
 import com.Yogify.birthdayreminder.ui.activitys.MainActivity
+import com.Yogify.birthdayreminder.ui.activitys.ProfileActivity
 import com.Yogify.birthdayreminder.ui.adapters.ReminderAdpter
 import com.Yogify.birthdayreminder.ui.notification.NotificationWorker
 import com.Yogify.birthdayreminder.ui.viewmodels.MainViewModel
@@ -183,7 +185,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             }
 
         })
-        reminderAdpter.setOnItemLOngClickListener(object :ReminderAdpter.OnItemLongClickListner{
+        reminderAdpter.setOnItemLOngClickListener(object : ReminderAdpter.OnItemLongClickListner {
             override fun onItemLongClick(type: Int, item: ReminderItem) {
                 optionMenuOnClick(item)
             }
@@ -207,40 +209,30 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
         bindingSheet.txtName.setTextColor(Color.parseColor(item.colorDark))
         bindingSheet.txtName.text = item.name
-        bindingSheet.imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item.colorDark))
+        bindingSheet.imgProfile.strokeColor =
+            ColorStateList.valueOf(Color.parseColor(item.colorLight))
         bindingSheet.viewDivider.setBackgroundColor(Color.parseColor(item.colorDark))
-        bindingSheet.rlBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item.colorLight))
+        bindingSheet.viewDividerBelow.setBackgroundColor(Color.parseColor(item.colorDark))
+        bindingSheet.rlBackground.backgroundTintList =
+            ColorStateList.valueOf(Color.parseColor(item.colorLight))
+//        bindingSheet.imgDeleteOption.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
+//        bindingSheet.imgEditOption.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
+//        bindingSheet.imgQrcodeOption.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
+//        bindingSheet.imgWhatsappOption.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
+//        bindingSheet.imgShareOption.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
 
         bindingSheet.txtWish.setTextColor(Color.parseColor(item.colorDark))
         bindingSheet.txtWish.text = item.wish
         bindingSheet.txtDateTime.setTextColor(Color.parseColor(item.colorDark))
         bindingSheet.txtDateTime.text = utils.longToDate(item.date, utils.DATE_DD_MMM_YYY_HH_MM)
         bindingSheet.txtDays.setTextColor(Color.parseColor(item.colorDark))
-        bindingSheet.txtDays.text = "${getString(R.string.turing)} ${(utils.calculateAge(item.date)+1).toString()} on ${utils.longToDate(item.date, utils.DATE_MMMM_DD)}"
-
-        Glide.with(requireContext()).load(item.imageUri).centerCrop()
-            .diskCacheStrategy(DiskCacheStrategy.NONE).error(R.drawable.ic_profile_demo)
-            .into(bindingSheet.imgProfile)
-
-        if (!bottomSheet.isShowing) bottomSheet.show()
-
-
-    }
-
-    fun optionMenuOnClick(item: ReminderItem) {
-
-        val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogtheme)
-        val bindingSheet = BottomsheetOptionmenuBinding.inflate(layoutInflater)
-        bottomSheet.setContentView(bindingSheet.root)
-        bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        val window = bottomSheet.window
-        window!!.findViewById<View>(com.google.android.material.R.id.container).fitsSystemWindows = false
-        bindingSheet.txtName.setTextColor(Color.parseColor(item.colorDark))
-        bindingSheet.txtName.setText(item.name)
-        bindingSheet.imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item?.colorDark))
-        bindingSheet.viewDivider.setBackgroundColor(Color.parseColor(item.colorDark))
-        bindingSheet.rlBackground.backgroundTintList = ColorStateList.valueOf(Color.parseColor(item?.colorLight))
-        bindingSheet.qrCancle.imageTintList = ColorStateList.valueOf(Color.parseColor(item?.colorDark))
+        bindingSheet.txtDays.text =
+            "${getString(R.string.turing)} ${(utils.calculateAge(item.date) + 1).toString()} on ${
+                utils.longToDate(
+                    item.date,
+                    utils.DATE_MMMM_DD
+                )
+            }"
 
         Glide.with(requireContext()).load(item.imageUri).centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.NONE).error(R.drawable.ic_profile_demo)
@@ -280,6 +272,69 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             createBarcode(bindingSheet, item, true)
         }
 
+
+        if (!bottomSheet.isShowing) bottomSheet.show()
+
+
+    }
+
+    fun optionMenuOnClick(item: ReminderItem) {
+
+        val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogtheme)
+        val bindingSheet = BottomsheetOptionmenuBinding.inflate(layoutInflater)
+        bottomSheet.setContentView(bindingSheet.root)
+        bottomSheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        val window = bottomSheet.window
+        window!!.findViewById<View>(com.google.android.material.R.id.container).fitsSystemWindows =
+            false
+        bindingSheet.txtName.setTextColor(Color.parseColor(item.colorDark))
+        bindingSheet.txtName.setText(item.name)
+        bindingSheet.imgProfile.strokeColor =
+            ColorStateList.valueOf(Color.parseColor(item?.colorDark))
+        bindingSheet.viewDivider.setBackgroundColor(Color.parseColor(item.colorDark))
+        bindingSheet.rlBackground.backgroundTintList =
+            ColorStateList.valueOf(Color.parseColor(item?.colorLight))
+        bindingSheet.qrCancle.imageTintList =
+            ColorStateList.valueOf(Color.parseColor(item?.colorDark))
+
+        Glide.with(requireContext()).load(item.imageUri).centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.NONE).error(R.drawable.ic_profile_demo)
+            .into(bindingSheet.imgProfile)
+
+//        bindingSheet.menuOptionDelete.setOnClickListener {
+//            bottomSheet.dismiss()
+//            var dialog = showAlertDialog(
+//                requireContext(),
+//                R.raw.delete_animation,
+//                getString(R.string.deletetitle),
+//                getString(R.string.deletesubtitle),
+//                getString(R.string.delete)
+//            )
+//            var postiveBtn = dialog.findViewById<Button>(R.id.alertBtnPositive)
+//            postiveBtn.setOnClickListener {
+//                dialog.dismiss()
+//                mainViewModel.deleteReminder(item)
+//            }
+//
+//        }
+//        bindingSheet.menuOptionEdit.setOnClickListener {
+//            bottomSheet.dismiss()
+//            startActivity(
+//                Intent(requireActivity(), AddReminderActivity::class.java).putExtra(
+//                    utils.EDIT_REMINDER, utils.reminderDataObjectToString(item)
+//                ).putExtra(utils.IS_EDIT_REMINDER, true)
+//            )
+//        }
+//        bindingSheet.menuOptionQr.setOnClickListener {
+//            createBarcode(bindingSheet, item)
+//        }
+//        bindingSheet.menuOptionShareWhatsapp.setOnClickListener {
+//            createBarcode(bindingSheet, item, true, true)
+//        }
+//        bindingSheet.menuOptionShare.setOnClickListener {
+//            createBarcode(bindingSheet, item, true)
+//        }
+
         if (!bottomSheet.isShowing) bottomSheet.show()
     }
 
@@ -300,6 +355,13 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             R.id.menu_scan -> startScanActivity.launch(
                 Intent(
                     activity, BarCodeScanerActivity::class.java
+                )
+            )
+
+            R.id.menu_profile -> startActivity(
+                Intent(
+                    requireContext(),
+                    ProfileActivity::class.java
                 )
             )
 
@@ -392,7 +454,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
 
     fun createBarcode(
-        bindingSheet: BottomsheetOptionmenuBinding,
+        bindingSheet: BottomsheetShowdetailsBinding,
         item: ReminderItem,
         isShare: Boolean = false,
         iswhatsapp: Boolean = false
@@ -429,7 +491,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
                             }
                             if (isShare) {
-                                shareReminder(iswhatsapp, bindingSheet.moreBottomsheet, item)
+                                shareReminder(iswhatsapp, bindingSheet.moreBottomsheetMore, item)
                             }
                         }
                     }

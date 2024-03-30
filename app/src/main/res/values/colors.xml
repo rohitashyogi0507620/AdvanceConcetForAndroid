@@ -31,6 +31,7 @@
     <color name="color_unselect_button">#DEDEDE</color>
     <color name="switch_off_color">#D9DEEA</color>
     <color name="colorIcon">#2D264B</color>
+    <color name="coloroptionbackground">#EDEDED</color>
 
 
     <string-array name="colorThemeLight">

@@ -74,6 +74,10 @@ class utils {
         const val NOTIFICATION_TYPE_SAMEDAY = 2
         const val NOTIFICATION_TYPE_SEVEN_DAY = 3
         const val NOTIFICATION_TYPE_ONE_MONTH = 4
+        const val THEME_LIGHT=1
+        const val THEME_DARK=2
+        const val THEME_AUTO=0
+        const val THEME_DYNAMIC=3
         const val GENDER_MALE = 1
         const val GENDER_FEMALE = 0
         const val DOWNLOAD_FOLDER = "Download"
