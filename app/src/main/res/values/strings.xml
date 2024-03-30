@@ -93,4 +93,6 @@
     <string name="dark_theme">Dark</string>
     <string name="auto_theme">Auto</string>
     <string name="dynamic_theme">Dynamic</string>
+    <string name="wifi">Wifi</string>
+    <string name="data">Data</string>
 </resources>

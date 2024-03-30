@@ -1,111 +1,170 @@
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
-    style="@style/CardView_Reminder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?colorPrimary"
-    app:strokeColor="?colorOnPrimary"
-    app:strokeWidth="@dimen/card_stroke_radious">
+    android:paddingLeft="@dimen/margin_10dp"
+    android:paddingRight="@dimen/margin_10dp">
 
+    <LinearLayout
 
-    <RelativeLayout
-        android:id="@+id/rl_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_10dp"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_10dp">
+            android:layout_weight="9"
+            android:background="@color/zxing_transparent"
+            android:orientation="horizontal">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/img_profile"
-                android:layout_width="@dimen/card_img_size"
-                android:layout_height="@dimen/card_img_size"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:padding="@dimen/margin_5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_profile_demo"
-                app:shapeAppearanceOverlay="@style/Round_Image"
-                app:strokeColor="?colorOnPrimary"
-                app:strokeWidth="@dimen/card_stroke_radious" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/img_profile"
-                android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_name"
-                    style="@style/TextAppearance_heading"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_view"
+                    style="@style/CardView_Reminder"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:text="@string/text_hint"
-                    android:textColor="?colorOnPrimary" />
+                    android:layout_centerVertical="true"
+                    app:cardBackgroundColor="?colorPrimary"
+                    app:contentPadding="@dimen/margin_10dp"
+                    app:strokeColor="?colorOnPrimary"
+                    app:strokeWidth="@dimen/card_stroke_radious">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_date_time"
-                    style="@style/TextAppearance_subheading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:maxLines="3"
-                    android:backgroundTint="?colorOnPrimary"
-                    android:text="21 January"
-                    android:textColor="?colorOnPrimary" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true" />
+
+                        <ImageView
+                            android:id="@+id/img_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_more"
+                            app:tint="?colorOnPrimary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/img_profile"
+                                android:layout_gravity="start"
+                                android:gravity="start"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txt_name"
+                                    style="@style/TextAppearance_heading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_gravity="start"
+                                    android:text="@string/text_hint"
+                                    android:textColor="?colorOnPrimary" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txt_date_time"
+                                    style="@style/TextAppearance_subheading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:backgroundTint="?colorOnPrimary"
+                                    android:maxLines="3"
+                                    android:text="21 January"
+                                    android:textColor="?colorOnPrimary" />
 
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_day_remains"
-                    style="@style/TextAppearance_smallsubheading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="?colorOnPrimary"
-                    android:text="10 Days Left"
-                    android:textColor="?colorOnPrimary" />
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txt_day_remains"
+                                    style="@style/TextAppearance_smallsubheading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="start"
+                                    android:backgroundTint="?colorOnPrimary"
+                                    android:text="10 Days Left"
+                                    android:textColor="?colorOnPrimary" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/txt_wish"
+                                    style="@style/TextAppearance_smallsubheading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:backgroundTint="?colorOnPrimary"
+                                    android:maxLines="2"
+                                    android:text="Your Birthday is Special for me as you now your are the one how ia ma love the most and i never tell this to you"
+                                    android:textColor="?colorOnPrimary"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_wish"
-                    android:maxLines="3"
-                    style="@style/TextAppearance_subheading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Your birthday is most special movement in my life"
-                    android:textColor="?colorOnPrimary"
-                    android:visibility="gone" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/img_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                app:srcCompat="@drawable/ic_more"
-                app:tint="?colorOnPrimary" />
-
+            </RelativeLayout>
 
         </LinearLayout>
 
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_profile"
+            android:layout_width="@dimen/card_img_size"
+            android:layout_height="@dimen/card_img_size"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin_5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile_demo"
+            app:shapeAppearanceOverlay="@style/Round_Image"
+            app:strokeColor="?colorOnPrimary"
+            app:strokeWidth="@dimen/card_stroke_radious" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/st_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="invisible" />
+
     </RelativeLayout>
 
-</com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

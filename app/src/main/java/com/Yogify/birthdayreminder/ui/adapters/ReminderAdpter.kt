@@ -12,8 +12,8 @@ import com.Yogify.birthdayreminder.R
 import com.Yogify.birthdayreminder.databinding.LayoutReminderGridBinding
 import com.Yogify.birthdayreminder.databinding.LayoutReminderListBinding
 import com.Yogify.birthdayreminder.model.ReminderItem
-import com.Yogify.birthdayreminder.util.utils
 import com.Yogify.birthdayreminder.util.utils.Companion.DATE_dd_MMMM
+import com.Yogify.birthdayreminder.util.utils.Companion.LAYOUT_GRID
 import com.Yogify.birthdayreminder.util.utils.Companion.calculateRemainDays
 import com.Yogify.birthdayreminder.util.utils.Companion.longToDate
 import com.Yogify.birthdayreminder.util.utils.Companion.remainDaysformate
@@ -21,11 +21,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 
-class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
+class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
 
 
     lateinit var mlistner: OnItemClickListner
     lateinit var mlonglistner: OnItemLongClickListner
+    var layoutType = LAYOUT_GRID
 
 
     interface OnItemClickListner {
@@ -44,9 +45,6 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
         mlonglistner = listener
     }
 
-    inner class ViewHolder(
-        var binding: LayoutReminderGridBinding, var bindingList: LayoutReminderListBinding
-    ) : RecyclerView.ViewHolder(binding.root)
 
     private val diffCallback = object : DiffUtil.ItemCallback<ReminderItem>() {
         override fun areItemsTheSame(oldItem: ReminderItem, newItem: ReminderItem): Boolean {
@@ -70,6 +68,11 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
         return ViewHolder(bindingGrid, bindingList)
     }
 
+
+    inner class ViewHolder(
+        var bindingGrid: LayoutReminderGridBinding, var bindingList: LayoutReminderListBinding
+    ) : RecyclerView.ViewHolder(if (layoutType == LAYOUT_GRID) bindingGrid.root else bindingList.root)
+
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
@@ -78,7 +81,7 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
 
         val item = differ.currentList[position]
 
-        holder.binding.apply {
+        holder.bindingList.apply {
             txtName.text = "${item?.name}"
             txtWish.text = "${item?.wish}"
             txtDateTime.text = longToDate(item?.date!!, DATE_dd_MMMM)
@@ -109,10 +112,51 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
             }
 
 
-            cardView.setOnLongClickListener {
-                mlonglistner.onItemLongClick(1, item)
-                true
+//            cardView.setOnLongClickListener {
+//                mlonglistner.onItemLongClick(1, item)
+//                true
+//            }
+
+            cardView.setOnClickListener {
+                mlistner.onItemClick(1, item)
             }
+        }
+
+        holder.bindingGrid.apply {
+            txtName.text = "${item?.name}"
+            txtWish.text = "${item?.wish}"
+            txtDateTime.text = longToDate(item?.date!!, DATE_dd_MMMM)
+            var remainingDays = calculateRemainDays(item.date!!)
+            if (remainingDays == 0) {
+                lottie.visibility = View.VISIBLE
+                lottie.setAnimation(R.raw.celebration)
+            } else lottie.visibility = View.GONE
+            txtDayRemains.text = remainDaysformate(imgProfile.context, remainingDays)
+
+            txtName.setTextColor(Color.parseColor(item.colorDark))
+            txtWish.setTextColor(Color.parseColor(item.colorDark))
+            txtDateTime.setTextColor(Color.parseColor(item.colorDark))
+            txtDayRemains.setTextColor(Color.parseColor(item.colorDark))
+
+            cardView.setCardBackgroundColor(Color.parseColor(item.colorLight))
+            cardView.strokeColor = Color.parseColor(item.colorDark)
+            imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item.colorDark))
+            imgDelete.setColorFilter(Color.parseColor(item.colorDark))
+
+            Glide.with(imgProfile.context).load(item.imageUri).centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .error(com.Yogify.birthdayreminder.R.drawable.ic_profile_demo).into(imgProfile)
+
+
+            imgDelete.setOnClickListener {
+                mlistner.onItemClick(2, item)
+            }
+
+
+//            cardView.setOnLongClickListener {
+//                mlonglistner.onItemLongClick(1, item)
+//                true
+//            }
 
             cardView.setOnClickListener {
                 mlistner.onItemClick(1, item)
@@ -122,7 +166,13 @@ class ReminderAdpter : RecyclerView.Adapter<ReminderAdpter.ViewHolder>() {
 
     }
 
-    fun performMoreOptionClick(item: ReminderItem) {
-        mlistner.onItemClick(2, item)
+    fun changeLayout(viewType: Int) {
+        layoutType = viewType
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return layoutType
+    }
+
+
 }

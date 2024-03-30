@@ -50,6 +50,8 @@ import com.Yogify.birthdayreminder.ui.notification.NotificationWorker
 import com.Yogify.birthdayreminder.ui.viewmodels.MainViewModel
 import com.Yogify.birthdayreminder.util.LocaleHelper
 import com.Yogify.birthdayreminder.util.utils
+import com.Yogify.birthdayreminder.util.utils.Companion.LAYOUT_GRID
+import com.Yogify.birthdayreminder.util.utils.Companion.LAYOUT_LINEAR
 import com.Yogify.birthdayreminder.util.utils.Companion.REMINDERITEM
 import com.Yogify.birthdayreminder.util.utils.Companion.showAlertDialog
 import com.Yogify.birthdayreminder.util.utils.Companion.showSnackbar
@@ -73,7 +75,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     lateinit var binding: FragmentHomeBinding
     lateinit var reminderAdpter: ReminderAdpter
     private val mainViewModel: MainViewModel by viewModels()
-    var LAYOUT_TYPE = 1
+    var LAYOUT_TYPE = LAYOUT_GRID
     val SPEECH_REQUEST_CODE = 0
     var imageUri: String? = null
 
@@ -83,17 +85,20 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     var googleAccount: GoogleSignInAccount? = null
 
     fun changeLayout(menuItem: MenuItem) {
-        if (LAYOUT_TYPE == 0) {
-            LAYOUT_TYPE = 1
+        if (LAYOUT_TYPE == LAYOUT_LINEAR) {
+            LAYOUT_TYPE = LAYOUT_GRID
             binding.rvReminder.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             menuItem.setIcon(resources.getDrawable(R.drawable.view_linear))
+            reminderAdpter.changeLayout(LAYOUT_TYPE)
+            binding.rvReminder.adapter = reminderAdpter
 
-        } else if (LAYOUT_TYPE == 1) {
-            LAYOUT_TYPE = 0
+        } else if (LAYOUT_TYPE == LAYOUT_GRID) {
+            LAYOUT_TYPE = LAYOUT_LINEAR
             binding.rvReminder.layoutManager = LinearLayoutManager(requireContext())
             menuItem.setIcon(resources.getDrawable(R.drawable.view_grid))
-
+            reminderAdpter.changeLayout(LAYOUT_TYPE)
+            binding.rvReminder.adapter = reminderAdpter
         }
 
     }
@@ -112,7 +117,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     override fun initViews() {
         super.initViews()
         binding.searchBar.setOnMenuItemClickListener(this)
-        reminderAdpter = ReminderAdpter()
+        reminderAdpter = ReminderAdpter(LAYOUT_TYPE)
         binding.rvReminder.adapter = reminderAdpter
         if (googleAccount != null) {
             Glide.with(this).load(googleAccount?.photoUrl).centerCrop().sizeMultiplier(0.50f)

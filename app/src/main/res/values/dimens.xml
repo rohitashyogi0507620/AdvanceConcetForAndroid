@@ -14,7 +14,7 @@
     <dimen name="switch_button_thumbsize">26dp</dimen>
     <dimen name="switch_button_tracksize">26dp</dimen>
     <dimen name="color_card">90dp</dimen>
-    <dimen name="alert_icon_size">130dp</dimen>
+    <dimen name="alert_icon_size">100dp</dimen>
     <dimen name="slider_size">250dp</dimen>
     <dimen name="margin_25dp">25dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>

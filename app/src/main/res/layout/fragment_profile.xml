@@ -346,7 +346,49 @@
                             android:text="@string/backup"
                             android:textColor="?colorOnPrimary" />
 
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipgroup_backup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/margin_5dp"
+                            app:checkedChip="@id/backup_auto"
+                            app:selectionRequired="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/backup_auto"
+                                style="@style/ChipStyleTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/auto_theme"
+                                app:checkedIcon="@drawable/ic_backup_auto"
+                                app:chipIcon="@drawable/ic_backup_auto" />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/backup_wifi"
+                                style="@style/ChipStyleTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/wifi"
+                                app:checkedIcon="@drawable/ic_wifi"
+                                app:chipIcon="@drawable/ic_wifi" />
+
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/backup_data"
+                                style="@style/ChipStyleTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/data"
+                                app:checkedIcon="@drawable/ic_data"
+                                app:chipIcon="@drawable/ic_data" />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+
+
                         <LinearLayout
+                            android:visibility="gone"
                             android:id="@+id/st_ll_backupon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

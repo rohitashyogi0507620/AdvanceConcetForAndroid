@@ -138,7 +138,8 @@ class ProfileFragment : BaseFragment() {
     private fun updateApplicationTheme() {
         when (themeType) {
             THEME_AUTO -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_TIME)
+
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
 
             THEME_LIGHT -> {
