@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -27,22 +28,27 @@ import com.Yogify.birthdayreminder.util.utils.Companion.THEME_AUTO
 import com.Yogify.birthdayreminder.util.utils.Companion.THEME_DARK
 import com.Yogify.birthdayreminder.util.utils.Companion.THEME_DYNAMIC
 import com.Yogify.birthdayreminder.util.utils.Companion.THEME_LIGHT
+import com.Yogify.birthdayreminder.util.utils.Companion.showFullSizeImageDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.Target
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.color.DynamicColors
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.annotation.Nullable
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
 
     lateinit var binding: FragmentProfileBinding
     private val mainViewModel: MainViewModel by viewModels()
+    var isLogin = false
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -71,7 +77,10 @@ class ProfileFragment : BaseFragment() {
 
     override fun initViews() {
         super.initViews()
-        if (googleAccount != null) processAccountInformation(googleAccount!!)
+        if (googleAccount != null) {
+            isLogin = true
+            processAccountInformation(googleAccount!!)
+        }
         setVersionCode()
     }
 
@@ -83,7 +92,7 @@ class ProfileFragment : BaseFragment() {
     override fun onClickListener() {
         super.onClickListener()
         binding.btnlogin.setOnClickListener {
-            requestSignIn()
+            if (isLogin) requestLogout() else requestSignIn()
         }
         binding.btnlogout.setOnClickListener {
             googleSignInClient.signOut().addOnSuccessListener {
@@ -100,6 +109,14 @@ class ProfileFragment : BaseFragment() {
                 driveHelper?.createFolder(getString(R.string.app_name))
             }
         }
+
+        binding.stImgProfile.setOnClickListener {
+            if (isLogin) showFullSizeImageDialog(
+                requireContext(),
+                googleAccount?.photoUrl.toString()
+            )
+        }
+
         binding.btnuploadFile.setOnClickListener {}
 
         binding.stLlRating.setOnClickListener {
@@ -243,15 +260,33 @@ class ProfileFragment : BaseFragment() {
         startGoogleSignInActivity.launch(googleSignInClient.getSignInIntent())
     }
 
+    fun requestLogout() {
+        binding.stProgress.visibility = View.VISIBLE
+        googleSignInClient.signOut().addOnSuccessListener {
+            binding.stTxtUsername.setText("")
+            binding.stTxtEmail.setText("")
+            binding.btnlogin.setText(R.string.login_with_google)
+            Glide.with(requireContext()).load("")
+                .centerCrop()
+                .placeholder(R.drawable.ic_profile_demo)
+                .into(binding.stImgProfile)
+            binding.stProgress.visibility = View.GONE
+            utils.showSnackbar(binding.root, getString(R.string.logoutsuccessfully))
+            isLogin = false
+        }
+    }
+
     val startGoogleSignInActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 if (result != null) {
+                    binding.stProgress.visibility = View.VISIBLE
                     GoogleSignIn.getSignedInAccountFromIntent(result.data)
                         .addOnSuccessListener { googleAccount ->
                             processAccountInformation(googleAccount)
                         }.addOnFailureListener { exception ->
                             exception.printStackTrace()
+                            binding.stProgress.visibility = View.GONE
                         }
                 }
             }
@@ -260,9 +295,13 @@ class ProfileFragment : BaseFragment() {
     fun processAccountInformation(googleAccount: GoogleSignInAccount) {
         Log.d("GoogleAccount", googleAccount.toString())
         binding.stTxtUsername.text = googleAccount.displayName.toString()
+        binding.stTxtEmail.text = googleAccount.email.toString()
         Glide.with(requireContext()).load(googleAccount.photoUrl)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).error(R.drawable.ic_profile_demo)
             .into(binding.stImgProfile)
+        binding.btnlogin.setText(R.string.logout)
+        binding.stProgress.visibility = View.GONE
+        isLogin = true
     }
 
 

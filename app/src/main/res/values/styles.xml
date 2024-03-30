@@ -11,8 +11,9 @@
     <style name="TextAppearance_subheading">
         <item name="android:textColor">@color/subheading_color</item>
         <item name="android:textSize">@dimen/subheading_text_size</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+
     </style>
 
     <style name="TextAppearance_subheading_small">
@@ -45,6 +46,8 @@
     <style name="TextAppearance_smallsubheading">
         <item name="android:textColor">@color/smallsubheading_color</item>
         <item name="android:textSize">@dimen/smallsubheading_text_size</item>
+        <item name="android:gravity">center</item>
+
     </style>
 
     <style name="CardView_Reminder">

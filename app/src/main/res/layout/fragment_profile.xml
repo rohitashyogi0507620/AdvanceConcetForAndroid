@@ -80,114 +80,122 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="@dimen/margin_5dp">
+                                android:orientation="vertical">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical"
+                                    android:padding="@dimen/margin_5dp">
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        style="@style/TextAppearance_Switch"
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:backgroundTint="?colorOnPrimary"
-                                        android:gravity="start"
-                                        android:text="@string/profile"
-                                        android:textColor="?colorOnPrimary" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight=".5"
-                                        android:gravity="right"
-                                        android:padding="15dp"
-                                        android:textSize="15dp"
-                                        android:textStyle="bold"
-                                        android:visibility="invisible"></TextView>
-
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/st_ll_username"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="@dimen/margin_10dp">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:layout_weight=".1"
-                                        android:padding="@dimen/margin_5dp"
-                                        android:src="@drawable/ic_username"
-                                        app:tint="@color/colorIcon"></ImageView>
+                                        android:orientation="horizontal">
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/st_txt_username"
-                                        style="@style/TextAppearance_Switch_small"
-                                        android:layout_width="0dp"
+                                        <com.google.android.material.textview.MaterialTextView
+                                            style="@style/TextAppearance_Switch"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:backgroundTint="?colorOnPrimary"
+                                            android:gravity="start"
+                                            android:text="@string/profile"
+                                            android:textColor="?colorOnPrimary" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_weight=".5"
+                                            android:gravity="right"
+                                            android:padding="15dp"
+                                            android:textSize="15dp"
+                                            android:textStyle="bold"
+                                            android:visibility="invisible"></TextView>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/st_ll_username"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight=".8"
-                                        android:gravity="start"
-                                        android:text="@string/username" />
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/margin_10dp">
+
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight=".1"
+                                            android:padding="@dimen/margin_5dp"
+                                            android:src="@drawable/ic_username"
+                                            app:tint="@color/colorIcon"></ImageView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/st_txt_username"
+                                            style="@style/TextAppearance_Switch_small"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight=".8"
+                                            android:gravity="start"
+                                            android:hint="@string/username" />
 
 
-                                </LinearLayout>
+                                    </LinearLayout>
 
-                                <LinearLayout
-                                    android:id="@+id/st_ll_gmail"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="@dimen/margin_10dp">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
+                                    <LinearLayout
+                                        android:id="@+id/st_ll_gmail"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_weight=".1"
-                                        android:padding="@dimen/margin_5dp"
-                                        android:src="@drawable/ic_gmail"></ImageView>
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/margin_10dp">
 
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:id="@+id/st_txt_email"
-                                        style="@style/TextAppearance_Switch_small"
-                                        android:layout_width="0dp"
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_weight=".1"
+                                            android:padding="@dimen/margin_5dp"
+                                            android:src="@drawable/ic_gmail"></ImageView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/st_txt_email"
+                                            style="@style/TextAppearance_Switch_small"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight=".8"
+                                            android:gravity="start"
+                                            android:hint="@string/email_account" />
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+
                                         android:layout_height="wrap_content"
-                                        android:layout_weight=".8"
-                                        android:gravity="start"
-                                        android:text="@string/email_account" />
+                                        android:orientation="horizontal"
+                                        android:padding="10dp"
+                                        android:visibility="gone">
+
+                                        <ImageView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".1"
+                                            android:padding="5dp"></ImageView>
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight=".9"
+                                            android:hint="Date of Birth"
+                                            android:padding="5dp"
+                                            android:textSize="18dp"></TextView>
+                                    </LinearLayout>
 
 
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="10dp"
-                                    android:visibility="gone">
-
-                                    <ImageView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight=".1"
-                                        android:padding="5dp"></ImageView>
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight=".9"
-                                        android:hint="Date of Birth"
-                                        android:padding="5dp"
-                                        android:textSize="18dp"></TextView>
                                 </LinearLayout>
 
                                 <com.google.android.material.button.MaterialButton
@@ -388,12 +396,12 @@
 
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:id="@+id/st_ll_backupon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="@dimen/margin_10dp">
+                            android:padding="@dimen/margin_10dp"
+                            android:visibility="gone">
 
                             <ImageView
                                 android:id="@+id/st_img_backupwifi"

@@ -56,8 +56,7 @@ class AppModule {
 
     @Provides
     fun provideSignInClient(
-        @ApplicationContext context: Context,
-        googleSignInOptions: GoogleSignInOptions
+        @ApplicationContext context: Context, googleSignInOptions: GoogleSignInOptions
     ): GoogleSignInClient {
         return GoogleSignIn.getClient(context, googleSignInOptions)
     }
@@ -65,8 +64,7 @@ class AppModule {
     @Provides
     @Nullable
     fun provideDrive(
-        @ApplicationContext context: Context,
-        @Nullable googleAccount: GoogleSignInAccount?
+        @ApplicationContext context: Context, @Nullable googleAccount: GoogleSignInAccount?
     ): Drive? {
         if (googleAccount != null) {
             val credential =
@@ -90,8 +88,7 @@ class AppModule {
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room.databaseBuilder(
-            appContext,
-            AppDatabase::class.java, REMINDER_DATABASE
+            appContext, AppDatabase::class.java, REMINDER_DATABASE
         ).setJournalMode(RoomDatabase.JournalMode.TRUNCATE).allowMainThreadQueries().build()
     }
 

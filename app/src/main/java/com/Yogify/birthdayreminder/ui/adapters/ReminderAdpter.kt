@@ -100,22 +100,10 @@ class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHo
             cardView.setCardBackgroundColor(Color.parseColor(item.colorLight))
             cardView.strokeColor = Color.parseColor(item.colorDark)
             imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item.colorDark))
-            imgDelete.setColorFilter(Color.parseColor(item.colorDark))
 
             Glide.with(imgProfile.context).load(item.imageUri).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(com.Yogify.birthdayreminder.R.drawable.ic_profile_demo).into(imgProfile)
-
-
-            imgDelete.setOnClickListener {
-                mlistner.onItemClick(2, item)
-            }
-
-
-//            cardView.setOnLongClickListener {
-//                mlonglistner.onItemLongClick(1, item)
-//                true
-//            }
 
             cardView.setOnClickListener {
                 mlistner.onItemClick(1, item)
@@ -141,22 +129,12 @@ class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHo
             cardView.setCardBackgroundColor(Color.parseColor(item.colorLight))
             cardView.strokeColor = Color.parseColor(item.colorDark)
             imgProfile.strokeColor = ColorStateList.valueOf(Color.parseColor(item.colorDark))
-            imgDelete.setColorFilter(Color.parseColor(item.colorDark))
 
             Glide.with(imgProfile.context).load(item.imageUri).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(com.Yogify.birthdayreminder.R.drawable.ic_profile_demo).into(imgProfile)
 
 
-            imgDelete.setOnClickListener {
-                mlistner.onItemClick(2, item)
-            }
-
-
-//            cardView.setOnLongClickListener {
-//                mlonglistner.onItemLongClick(1, item)
-//                true
-//            }
 
             cardView.setOnClickListener {
                 mlistner.onItemClick(1, item)

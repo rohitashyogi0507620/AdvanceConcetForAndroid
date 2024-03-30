@@ -95,4 +95,5 @@
     <string name="dynamic_theme">Dynamic</string>
     <string name="wifi">Wifi</string>
     <string name="data">Data</string>
+    <string name="logout">Logout</string>
 </resources>

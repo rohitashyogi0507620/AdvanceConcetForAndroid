@@ -23,6 +23,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -37,6 +38,8 @@ import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.model.ThemeColor
 import com.airbnb.lottie.Lottie
 import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -74,12 +77,12 @@ class utils {
         const val NOTIFICATION_TYPE_SAMEDAY = 2
         const val NOTIFICATION_TYPE_SEVEN_DAY = 3
         const val NOTIFICATION_TYPE_ONE_MONTH = 4
-        const val LAYOUT_GRID=1
-        const val LAYOUT_LINEAR=2
-        const val THEME_LIGHT=1
-        const val THEME_DARK=2
-        const val THEME_AUTO=0
-        const val THEME_DYNAMIC=3
+        const val LAYOUT_GRID = 1
+        const val LAYOUT_LINEAR = 2
+        const val THEME_LIGHT = 1
+        const val THEME_DARK = 2
+        const val THEME_AUTO = 0
+        const val THEME_DYNAMIC = 3
         const val GENDER_MALE = 1
         const val GENDER_FEMALE = 0
         const val DOWNLOAD_FOLDER = "Download"
@@ -361,6 +364,30 @@ class utils {
             return alertdialog
         }
 
+        fun showFullSizeImageDialog(
+            context: Context,
+            imageurl: String
+        ): Dialog {
+            val alertdialog = Dialog(context)
+            alertdialog.setContentView(R.layout.layout_fullsize_image)
+            alertdialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            alertdialog.setCanceledOnTouchOutside(false)
+            alertdialog.window!!.setLayout(
+                ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.FILL_PARENT
+            )
+
+            Glide.with(context).load(imageurl)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).error(R.drawable.ic_profile_demo)
+                .into(alertdialog.findViewById<ImageView>(R.id.img_fullsize_profile))
+
+            alertdialog.findViewById<ImageView>(R.id.img_full_size_cancel).setOnClickListener {
+                alertdialog.dismiss()
+            }
+            alertdialog.show()
+            return alertdialog
+        }
+
 
         fun calculateAge(value: Long): Int {
 
@@ -401,19 +428,19 @@ class utils {
                 date2.time = Date(long)
                 date2.set(Calendar.YEAR, date1.get(Calendar.YEAR))
 
-                var remainmillis:Long=0
-                var upcoming=false
-                if (date1.timeInMillis>date2.timeInMillis){
-                    upcoming=true
-                    remainmillis= date1.timeInMillis - date2.timeInMillis
-                }else{
-                    upcoming=false
-                    remainmillis= date2.timeInMillis - date1.timeInMillis
+                var remainmillis: Long = 0
+                var upcoming = false
+                if (date1.timeInMillis > date2.timeInMillis) {
+                    upcoming = true
+                    remainmillis = date1.timeInMillis - date2.timeInMillis
+                } else {
+                    upcoming = false
+                    remainmillis = date2.timeInMillis - date1.timeInMillis
                 }
-                Log.d("YEARS",remainmillis.toString())
-                var daysDifference =(remainmillis / (1000 * 60 * 60 * 24)).toInt()
+                Log.d("YEARS", remainmillis.toString())
+                var daysDifference = (remainmillis / (1000 * 60 * 60 * 24)).toInt()
                 Log.d("YEARS", daysDifference.toString())
-                if (upcoming && daysDifference!=0) daysDifference=365-daysDifference
+                if (upcoming && daysDifference != 0) daysDifference = 365 - daysDifference
                 return daysDifference
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -423,12 +450,12 @@ class utils {
 
         }
 
-        fun remainDaysformate(context: Context,days: Int):String{
-            if (days==0) return context.getString(R.string.today)
-            else if (days==2)  return context.getString(R.string.tomorrow)
-            else if (days==7)  return context.getString(R.string.oneweekleft)
-            else if (days==14)  return context.getString(R.string.twoweekleft)
-            else return "${days} "+context.getString(R.string.daysleft)
+        fun remainDaysformate(context: Context, days: Int): String {
+            if (days == 0) return context.getString(R.string.today)
+            else if (days == 2) return context.getString(R.string.tomorrow)
+            else if (days == 7) return context.getString(R.string.oneweekleft)
+            else if (days == 14) return context.getString(R.string.twoweekleft)
+            else return "${days} " + context.getString(R.string.daysleft)
 
         }
 

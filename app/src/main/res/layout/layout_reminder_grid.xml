@@ -12,6 +12,7 @@
         android:id="@+id/rl_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie"
             android:layout_width="match_parent"
@@ -19,15 +20,17 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            />
+            app:lottie_loop="true" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_10dp"
+            android:layout_marginStart="@dimen/margin_5dp"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_marginEnd="@dimen/margin_5dp"
+            android:layout_marginBottom="@dimen/margin_5dp"
             android:orientation="vertical"
-            android:padding="@dimen/margin_10dp">
+            android:padding="@dimen/margin_5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_profile"
@@ -43,15 +46,6 @@
                 app:strokeWidth="@dimen/card_stroke_radious" />
 
 
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/img_delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                app:srcCompat="@drawable/ic_more"
-                app:tint="?colorOnPrimary" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,19 +55,21 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_name"
                     style="@style/TextAppearance_heading"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:text="@string/text_hint"
+                    android:maxLines="2"
                     android:textColor="?colorOnPrimary" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_date_time"
                     style="@style/TextAppearance_subheading"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:maxLines="1"
                     android:backgroundTint="?colorOnPrimary"
                     android:text="21 January"
                     android:textColor="?colorOnPrimary" />
@@ -82,9 +78,10 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_day_remains"
                     style="@style/TextAppearance_smallsubheading"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:maxLines="1"
                     android:backgroundTint="?colorOnPrimary"
                     android:text="10 Days Left"
                     android:textColor="?colorOnPrimary" />
@@ -92,11 +89,11 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_wish"
-                    android:maxLines="3"
                     style="@style/TextAppearance_subheading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:maxLines="3"
                     android:text="Your birthday is most special movement in my life"
                     android:textColor="?colorOnPrimary"
                     android:visibility="gone" />

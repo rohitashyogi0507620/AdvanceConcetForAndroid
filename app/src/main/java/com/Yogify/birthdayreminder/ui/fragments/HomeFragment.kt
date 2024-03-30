@@ -243,6 +243,13 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             .diskCacheStrategy(DiskCacheStrategy.NONE).error(R.drawable.ic_profile_demo)
             .into(bindingSheet.imgProfile)
 
+        bindingSheet.imgProfile.setOnClickListener {
+            utils.showFullSizeImageDialog(
+                requireContext(),
+                item.imageUri
+            )
+        }
+
         bindingSheet.menuOptionDelete.setOnClickListener {
             bottomSheet.dismiss()
             var dialog = showAlertDialog(
