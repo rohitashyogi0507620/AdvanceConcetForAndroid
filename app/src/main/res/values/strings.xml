@@ -49,7 +49,7 @@
     <string name="edit">Edit</string>
     <string name="copy">Copy</string>
     <string name="share">Share</string>
-    <string name="showqrcode">Show Qr Code</string>
+    <string name="showqrcode">Qr Code</string>
     <string name="scan">Scan</string>
     <string name="remindercontentNotFound">Reminder Not Found . Please Scan Correct QR Code</string>
     <string name="logoutsuccessfully">Logout Successfuly</string>
@@ -60,7 +60,7 @@
     <string name="sendSms">Message</string>
     <string name="sendWhatsapp">Whatsapp</string>
     <string name="shareReminder">Share Reminder With</string>
-    <string name="sharewhatsapp">Share On WhatsApp</string>
+    <string name="sharewhatsapp">WhatsApp</string>
     <string name="whatsappNotFound">Whatapp is not install</string>
     <string name="cancel">cancel</string>
     <string name="turing">Turns</string>
@@ -96,4 +96,7 @@
     <string name="wifi">Wifi</string>
     <string name="data">Data</string>
     <string name="logout">Logout</string>
+    <string name="english">English</string>
+    <string name="hindi">Hindi</string>
+    <string name="userprofile">Profile</string>
 </resources>

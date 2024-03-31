@@ -13,11 +13,6 @@
         android:icon="@drawable/ic_scan"
         android:title="@string/scan"
         app:showAsAction="always"></item>
-    <item
-        android:id="@+id/menu_language"
-        android:icon="@drawable/ic_language"
-        android:title="@string/language"
-        app:showAsAction="always"></item>
 
     <item
         android:visible="false"

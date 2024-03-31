@@ -27,16 +27,14 @@ class LocaleHelper {
         }
 
         private fun persist(context: Context, language: String) {
-            val preferences: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
+            val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val editor = preferences.edit()
             editor.putString(SELECTED_LANGUAGE, language)
             editor.apply()
         }
 
         fun getLocale(context: Context): String {
-            val preferences: SharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(context)
+            val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val language = preferences.getString(SELECTED_LANGUAGE, "en")!!
             return language
         }

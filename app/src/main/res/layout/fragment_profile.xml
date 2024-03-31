@@ -100,7 +100,7 @@
                                             android:layout_height="wrap_content"
                                             android:backgroundTint="?colorOnPrimary"
                                             android:gravity="start"
-                                            android:text="@string/profile"
+                                            android:text="@string/userprofile"
                                             android:textColor="?colorOnPrimary" />
 
                                         <TextView
@@ -325,6 +325,61 @@
                                 android:text="@string/dynamic_theme"
                                 app:checkedIcon="@drawable/ic_theme_dynamic"
                                 app:chipIcon="@drawable/ic_theme_dynamic" />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardView_Reminder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:contentPadding="@dimen/margin_10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance_Switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="?colorOnPrimary"
+                            android:gravity="start"
+                            android:text="@string/language"
+                            android:textColor="?colorOnPrimary" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipgroup_language"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/margin_5dp"
+                            app:checkedChip="@id/language_english"
+                            app:selectionRequired="true"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/language_english"
+                                style="@style/ChipStyleTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/english"
+                                app:checkedIcon="@drawable/ic_lang_english"
+                                app:chipIcon="@drawable/ic_lang_english" />
+
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/language_hindi"
+                                style="@style/ChipStyleTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/hindi"
+                                app:checkedIcon="@drawable/ic_lang_hindi"
+                                app:chipIcon="@drawable/ic_lang_hindi" />
 
 
                         </com.google.android.material.chip.ChipGroup>

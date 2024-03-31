@@ -20,6 +20,7 @@
     <dimen name="margin_2dp">2dp</dimen>
     <dimen name="profile_stroke_radious">4dp</dimen>
     <dimen name="seprate_line">2dp</dimen>
+    <dimen name="search_icon_size">80dp</dimen>
 
 
 </resources>

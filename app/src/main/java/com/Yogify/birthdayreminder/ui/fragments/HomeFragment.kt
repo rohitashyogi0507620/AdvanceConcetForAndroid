@@ -12,13 +12,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.speech.RecognizerIntent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
@@ -43,12 +44,12 @@ import com.Yogify.birthdayreminder.databinding.FragmentHomeBinding
 import com.Yogify.birthdayreminder.model.ReminderItem
 import com.Yogify.birthdayreminder.ui.activitys.AddReminderActivity
 import com.Yogify.birthdayreminder.ui.activitys.BarCodeScanerActivity
-import com.Yogify.birthdayreminder.ui.activitys.MainActivity
 import com.Yogify.birthdayreminder.ui.activitys.ProfileActivity
 import com.Yogify.birthdayreminder.ui.adapters.ReminderAdpter
+import com.Yogify.birthdayreminder.ui.adapters.ReminderSearchAdpter
+import com.Yogify.birthdayreminder.ui.adapters.SearchAdapter
 import com.Yogify.birthdayreminder.ui.notification.NotificationWorker
 import com.Yogify.birthdayreminder.ui.viewmodels.MainViewModel
-import com.Yogify.birthdayreminder.util.LocaleHelper
 import com.Yogify.birthdayreminder.util.utils
 import com.Yogify.birthdayreminder.util.utils.Companion.LAYOUT_GRID
 import com.Yogify.birthdayreminder.util.utils.Companion.LAYOUT_LINEAR
@@ -62,55 +63,86 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.search.SearchView.TransitionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
-import javax.annotation.Nullable
-import javax.inject.Inject
+import java.util.Locale
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuItemClickListener {
 
+
+    //  @set :Inject when we user private variable to inject
+    //    @set:Inject
+    //    @Nullable
+    //    var googleAccount: GoogleSignInAccount? = null
+
+
+    var searchlist = listOf<ReminderItem>()
     lateinit var binding: FragmentHomeBinding
     lateinit var reminderAdpter: ReminderAdpter
+    lateinit var searchreminderAdpter: SearchAdapter
     private val mainViewModel: MainViewModel by viewModels()
     var LAYOUT_TYPE = LAYOUT_GRID
     val SPEECH_REQUEST_CODE = 0
     var imageUri: String? = null
 
-    // @set :Inject when we user private variable to inject
-    //    @set:Inject
-    //    @Nullable
-    //    var googleAccount: GoogleSignInAccount? = null
-
-    fun changeLayout(menuItem: MenuItem) {
-        if (LAYOUT_TYPE == LAYOUT_LINEAR) {
-            LAYOUT_TYPE = LAYOUT_GRID
-            binding.rvReminder.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            menuItem.setIcon(resources.getDrawable(R.drawable.view_linear))
-            reminderAdpter.changeLayout(LAYOUT_TYPE)
-            binding.rvReminder.adapter = reminderAdpter
-
-        } else if (LAYOUT_TYPE == LAYOUT_GRID) {
-            LAYOUT_TYPE = LAYOUT_LINEAR
-            binding.rvReminder.layoutManager = LinearLayoutManager(requireContext())
-            menuItem.setIcon(resources.getDrawable(R.drawable.view_grid))
-            reminderAdpter.changeLayout(LAYOUT_TYPE)
-            binding.rvReminder.adapter = reminderAdpter
-        }
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val uploadWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>().build()
+        WorkManager.getInstance(requireContext()).enqueue(uploadWorkRequest)
+        GoogleSignIn.getLastSignedInAccount(requireContext()).also { googleAccount ->
+            if (googleAccount != null) {
+                Glide.with(this).load(googleAccount?.photoUrl).centerCrop().sizeMultiplier(0.50f)
+                    .addListener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            model: Any,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            resource.let {
+                                lifecycleScope.launch(Dispatchers.Main) {
+                                    binding.searchBar.menu.findItem(R.id.menu_profile).icon =
+                                        resource
+                                }
+                            }
+                            return true
+                        }
+
+
+                    }).circleCrop().submit()
+            } else {
+                lifecycleScope.launch(Dispatchers.Main) {
+                    binding.searchBar.menu.findItem(R.id.menu_profile)
+                        .setIcon(R.drawable.ic_profile_demo)
+                }
+            }
+        }
+
     }
 
 
@@ -120,18 +152,46 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
     override fun initViews() {
         super.initViews()
+
         binding.searchBar.setOnMenuItemClickListener(this)
         reminderAdpter = ReminderAdpter(LAYOUT_TYPE)
         binding.rvReminder.adapter = reminderAdpter
 
 
+        binding.searchview.addTransitionListener { searchView, previousState, newState ->
+            if (newState == TransitionState.SHOWING) {
+                searchreminderAdpter = SearchAdapter(searchlist)
+                binding.rvSearchReminder.adapter = searchreminderAdpter
+                searchreminderAdpter.setOnItemClickListener(object :
+                    SearchAdapter.OnItemClickListner {
+                    override fun onItemClick(type: Int, item: ReminderItem) {
+                        binding.searchview.hide()
+                        reminderAdpter.performItemClick(item)
+                    }
+
+                })
+            }
+        }
+        binding.searchview.editText.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                filter(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun afterTextChanged(theWatchedText: Editable) {}
+        })
+
     }
+
 
     override fun observers() {
         super.observers()
         lifecycle.coroutineScope.launch {
             mainViewModel.getReminder().collect() {
                 reminderAdpter.submitList(it)
+                searchlist = it
             }
         }
 
@@ -168,13 +228,14 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             }
 
         })
+
         binding.mainFbAdd.setOnClickListener {
             startActivity(Intent(requireContext(), AddReminderActivity::class.java))
 
         }
     }
 
-    private fun itemBottomSheeet(item: ReminderItem) {
+    fun itemBottomSheeet(item: ReminderItem) {
 
         val bottomSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogtheme)
         val bindingSheet = BottomsheetShowdetailsBinding.inflate(layoutInflater)
@@ -206,8 +267,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
         bindingSheet.txtDays.text =
             "${getString(R.string.turing)} ${(utils.calculateAge(item.date) + 1).toString()} on ${
                 utils.longToDate(
-                    item.date,
-                    utils.DATE_MMMM_DD
+                    item.date, utils.DATE_MMMM_DD
                 )
             }"
 
@@ -216,9 +276,8 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             .into(bindingSheet.imgProfile)
 
         bindingSheet.imgProfile.setOnClickListener {
-           if (!item.imageUri.equals("null")) utils.showFullSizeImageDialog(
-                requireContext(),
-                item.imageUri
+            if (!item.imageUri.equals("null")) utils.showFullSizeImageDialog(
+                requireContext(), item.imageUri
             )
         }
 
@@ -335,7 +394,6 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             R.id.menu_notification -> Log.d("MENU", getString(R.string.profile))
             R.id.menu_voice_search -> displaySpeechRecognizer()
             R.id.menu_view -> changeLayout(menuItem)
-            R.id.menu_language -> changeLanguage(menuItem)
             R.id.menu_scan -> startScanActivity.launch(
                 Intent(
                     activity, BarCodeScanerActivity::class.java
@@ -344,8 +402,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
 
             R.id.menu_profile -> startActivity(
                 Intent(
-                    requireContext(),
-                    ProfileActivity::class.java
+                    requireContext(), ProfileActivity::class.java
                 )
             )
 
@@ -354,16 +411,6 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
         return true
     }
 
-    private fun changeLanguage(menuItem: MenuItem) {
-        var context = LocaleHelper.setLocale(requireActivity())
-        startActivity(
-            Intent(
-                requireContext(), MainActivity::class.java
-            ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        )
-
-        requireActivity().finish()
-    }
 
     val startScanActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -538,51 +585,35 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        val uploadWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>().build()
-        WorkManager.getInstance(requireContext()).enqueue(uploadWorkRequest)
+    fun filter(text: String) {
+        val filteredlist = mutableListOf<ReminderItem>()
 
-        GoogleSignIn.getLastSignedInAccount(requireContext()).also { googleAccount ->
-            if (googleAccount != null) {
-                Glide.with(this).load(googleAccount?.photoUrl).centerCrop().sizeMultiplier(0.50f)
-                    .addListener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            return false
-                        }
-
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            model: Any,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            resource.let {
-                                lifecycleScope.launch(Dispatchers.IO) {
-                                    binding.searchBar.menu.findItem(R.id.menu_profile).icon =
-                                        resource
-                                }
-                            }
-                            return true
-                        }
-
-
-                    }).circleCrop().submit()
-                binding.searchBar.setHint(googleAccount?.displayName)
-            } else {
-                binding.searchBar.setHint(getString(R.string.search_hint))
-                lifecycleScope.launch(Dispatchers.IO) {
-                    binding.searchBar.menu.findItem(R.id.menu_profile).setIcon(R.drawable.ic_profile_demo)
-                }
+        for (item in searchlist) {
+            if (item.name.lowercase().contains(text.lowercase(Locale.getDefault()))) {
+                filteredlist.add(item)
             }
         }
-
+        searchreminderAdpter.filterList(filteredlist)
 
     }
+
+    fun changeLayout(menuItem: MenuItem) {
+        if (LAYOUT_TYPE == LAYOUT_LINEAR) {
+            LAYOUT_TYPE = LAYOUT_GRID
+            binding.rvReminder.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            menuItem.setIcon(resources.getDrawable(R.drawable.view_linear))
+            reminderAdpter.changeLayout(LAYOUT_TYPE)
+            binding.rvReminder.adapter = reminderAdpter
+
+        } else if (LAYOUT_TYPE == LAYOUT_GRID) {
+            LAYOUT_TYPE = LAYOUT_LINEAR
+            binding.rvReminder.layoutManager = LinearLayoutManager(requireContext())
+            menuItem.setIcon(resources.getDrawable(R.drawable.view_grid))
+            reminderAdpter.changeLayout(LAYOUT_TYPE)
+            binding.rvReminder.adapter = reminderAdpter
+        }
+
+    }
+
 }

@@ -86,10 +86,10 @@ class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHo
             txtWish.text = "${item?.wish}"
             txtDateTime.text = longToDate(item?.date!!, DATE_dd_MMMM)
             var remainingDays = calculateRemainDays(item.date!!)
-            if (remainingDays == 0) {
-                lottie.visibility = View.VISIBLE
-                lottie.setAnimation(R.raw.celebration)
-            } else lottie.visibility = View.GONE
+//            if (remainingDays == 0) {
+//                lottie.visibility = View.VISIBLE
+//                lottie.setAnimation(R.raw.celebration)
+//            } else lottie.visibility = View.GONE
             txtDayRemains.text = remainDaysformate(imgProfile.context, remainingDays)
 
             txtName.setTextColor(Color.parseColor(item.colorDark))
@@ -115,10 +115,10 @@ class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHo
             txtWish.text = "${item?.wish}"
             txtDateTime.text = longToDate(item?.date!!, DATE_dd_MMMM)
             var remainingDays = calculateRemainDays(item.date!!)
-            if (remainingDays == 0) {
-                lottie.visibility = View.VISIBLE
-                lottie.setAnimation(R.raw.celebration)
-            } else lottie.visibility = View.GONE
+//            if (remainingDays == 0) {
+//                lottie.visibility = View.VISIBLE
+//                lottie.setAnimation(R.raw.celebration)
+//            } else lottie.visibility = View.GONE
             txtDayRemains.text = remainDaysformate(imgProfile.context, remainingDays)
 
             txtName.setTextColor(Color.parseColor(item.colorDark))
@@ -142,6 +142,10 @@ class ReminderAdpter(var type: Int) : RecyclerView.Adapter<ReminderAdpter.ViewHo
         }
 
 
+    }
+
+    fun performItemClick(item:ReminderItem){
+        mlistner.onItemClick(1, item)
     }
 
     fun changeLayout(viewType: Int) {

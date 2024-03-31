@@ -20,9 +20,11 @@ import androidx.fragment.app.viewModels
 import com.Yogify.birthdayreminder.R
 import com.Yogify.birthdayreminder.backup.DriveHelper
 import com.Yogify.birthdayreminder.databinding.FragmentProfileBinding
+import com.Yogify.birthdayreminder.ui.activitys.MainActivity
 import com.Yogify.birthdayreminder.ui.viewmodels.MainViewModel
 import com.Yogify.birthdayreminder.util.Constants.ABOUT_DEVELOPER
 import com.Yogify.birthdayreminder.util.Constants.PRIVECY_POLICY
+import com.Yogify.birthdayreminder.util.LocaleHelper
 import com.Yogify.birthdayreminder.util.utils
 import com.Yogify.birthdayreminder.util.utils.Companion.THEME_AUTO
 import com.Yogify.birthdayreminder.util.utils.Companion.THEME_DARK
@@ -112,8 +114,7 @@ class ProfileFragment : BaseFragment() {
 
         binding.stImgProfile.setOnClickListener {
             if (isLogin) showFullSizeImageDialog(
-                requireContext(),
-                googleAccount?.photoUrl.toString()
+                requireContext(), googleAccount?.photoUrl.toString()
             )
         }
 
@@ -150,12 +151,26 @@ class ProfileFragment : BaseFragment() {
 
         }
 
+        binding.chipgroupLanguage.setOnCheckedChangeListener { group, checkedId ->
+            changeLanguage()
+        }
+
+    }
+
+    private fun changeLanguage() {
+        var context = LocaleHelper.setLocale(requireActivity())
+        startActivity(
+            Intent(
+                context,
+                MainActivity::class.java
+            ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        )
+        requireActivity().finish()
     }
 
     private fun updateApplicationTheme() {
         when (themeType) {
             THEME_AUTO -> {
-
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
 
@@ -266,10 +281,8 @@ class ProfileFragment : BaseFragment() {
             binding.stTxtUsername.setText("")
             binding.stTxtEmail.setText("")
             binding.btnlogin.setText(R.string.login_with_google)
-            Glide.with(requireContext()).load("")
-                .centerCrop()
-                .placeholder(R.drawable.ic_profile_demo)
-                .into(binding.stImgProfile)
+            Glide.with(requireContext()).load("").centerCrop()
+                .placeholder(R.drawable.ic_profile_demo).into(binding.stImgProfile)
             binding.stProgress.visibility = View.GONE
             utils.showSnackbar(binding.root, getString(R.string.logoutsuccessfully))
             isLogin = false
@@ -294,7 +307,7 @@ class ProfileFragment : BaseFragment() {
 
     fun processAccountInformation(account: GoogleSignInAccount) {
         Log.d("GoogleAccount", account.toString())
-        googleAccount=account
+        googleAccount = account
         binding.stTxtUsername.text = account.displayName.toString()
         binding.stTxtEmail.text = account.email.toString()
         Glide.with(requireContext()).load(account.photoUrl)
