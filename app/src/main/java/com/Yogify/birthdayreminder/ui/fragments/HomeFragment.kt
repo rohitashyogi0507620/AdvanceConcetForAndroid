@@ -61,15 +61,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import javax.annotation.Nullable
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuItemClickListener {
 
     lateinit var binding: FragmentHomeBinding
@@ -80,9 +83,9 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     var imageUri: String? = null
 
     // @set :Inject when we user private variable to inject
-    @set:Inject
-    @Nullable
-    var googleAccount: GoogleSignInAccount? = null
+    //    @set:Inject
+    //    @Nullable
+    //    var googleAccount: GoogleSignInAccount? = null
 
     fun changeLayout(menuItem: MenuItem) {
         if (LAYOUT_TYPE == LAYOUT_LINEAR) {
@@ -110,6 +113,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
         return binding.root
     }
 
+
     override fun getBundle() {
         super.getBundle()
     }
@@ -119,39 +123,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
         binding.searchBar.setOnMenuItemClickListener(this)
         reminderAdpter = ReminderAdpter(LAYOUT_TYPE)
         binding.rvReminder.adapter = reminderAdpter
-        if (googleAccount != null) {
-            Glide.with(this).load(googleAccount?.photoUrl).centerCrop().sizeMultiplier(0.50f)
-                .addListener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
 
-                    override fun onResourceReady(
-                        resource: Drawable,
-                        model: Any,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        resource.let {
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                binding.searchBar.menu.findItem(R.id.menu_profile).icon = resource
-                            }
-                        }
-                        return true
-                    }
-
-
-                }).circleCrop().submit()
-            binding.searchBar.setHint(googleAccount?.displayName)
-        } else {
-            binding.searchBar.setHint(getString(R.string.search_hint))
-        }
 
     }
 
@@ -570,6 +542,47 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
         super.onStart()
         val uploadWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>().build()
         WorkManager.getInstance(requireContext()).enqueue(uploadWorkRequest)
+
+        GoogleSignIn.getLastSignedInAccount(requireContext()).also { googleAccount ->
+            if (googleAccount != null) {
+                Glide.with(this).load(googleAccount?.photoUrl).centerCrop().sizeMultiplier(0.50f)
+                    .addListener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            model: Any,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            resource.let {
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    binding.searchBar.menu.findItem(R.id.menu_profile).icon =
+                                        resource
+                                }
+                            }
+                            return true
+                        }
+
+
+                    }).circleCrop().submit()
+                binding.searchBar.setHint(googleAccount?.displayName)
+            } else {
+                binding.searchBar.setHint(getString(R.string.search_hint))
+                lifecycleScope.launch(Dispatchers.IO) {
+                    binding.searchBar.menu.findItem(R.id.menu_profile).setIcon(R.drawable.ic_profile_demo)
+                }
+            }
+        }
+
 
     }
 }

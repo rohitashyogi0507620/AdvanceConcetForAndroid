@@ -292,11 +292,12 @@ class ProfileFragment : BaseFragment() {
             }
         }
 
-    fun processAccountInformation(googleAccount: GoogleSignInAccount) {
-        Log.d("GoogleAccount", googleAccount.toString())
-        binding.stTxtUsername.text = googleAccount.displayName.toString()
-        binding.stTxtEmail.text = googleAccount.email.toString()
-        Glide.with(requireContext()).load(googleAccount.photoUrl)
+    fun processAccountInformation(account: GoogleSignInAccount) {
+        Log.d("GoogleAccount", account.toString())
+        googleAccount=account
+        binding.stTxtUsername.text = account.displayName.toString()
+        binding.stTxtEmail.text = account.email.toString()
+        Glide.with(requireContext()).load(account.photoUrl)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).error(R.drawable.ic_profile_demo)
             .into(binding.stImgProfile)
         binding.btnlogin.setText(R.string.logout)
