@@ -216,7 +216,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             .into(bindingSheet.imgProfile)
 
         bindingSheet.imgProfile.setOnClickListener {
-            utils.showFullSizeImageDialog(
+           if (!item.imageUri.equals("null")) utils.showFullSizeImageDialog(
                 requireContext(),
                 item.imageUri
             )
