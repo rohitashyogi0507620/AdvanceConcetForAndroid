@@ -89,6 +89,9 @@ class MainRepository @Inject constructor(
                 set(Calendar.MINUTE, calendar.get(Calendar.MINUTE))
                 set(Calendar.SECOND, 0)
             }.timeInMillis
+            Log.d("TIMENEXT", nextTrigger.toString())
+            Log.d("TIMECURRENT", currentTimeMillis.toString())
+
 
             if (nextTrigger > currentTimeMillis) {
                 listdata.add(it)

@@ -1,9 +1,8 @@
 package com.Yogify.birthdayreminder.util
 
 object Constants {
-    const val BASE_URL = "https://sandbox.rechapi.com/"
-    const val BUS_STOP = "bus/busStops.php"
-    const val ABOUT_DEVELOPER="https://ballonsdecor.com/"
-    const val PRIVECY_POLICY="https://ballonsdecor.com/"
+
+    const val ABOUT_DEVELOPER="https://yogifyapps.blogspot.com/2024/06/contact-us.html"
+    const val PRIVECY_POLICY="https://yogifyapps.blogspot.com/2024/06/birthday-reminder.html"
 
 }

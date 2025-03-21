@@ -86,7 +86,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
     var searchlist = listOf<ReminderItem>()
     lateinit var binding: FragmentHomeBinding
     lateinit var reminderAdpter: ReminderAdpter
-    lateinit var searchreminderAdpter: SearchAdapter
+    var searchreminderAdpter: SearchAdapter?=null
     private val mainViewModel: MainViewModel by viewModels()
     var LAYOUT_TYPE = LAYOUT_GRID
     val SPEECH_REQUEST_CODE = 0
@@ -162,7 +162,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
             if (newState == TransitionState.SHOWING) {
                 searchreminderAdpter = SearchAdapter(searchlist)
                 binding.rvSearchReminder.adapter = searchreminderAdpter
-                searchreminderAdpter.setOnItemClickListener(object :
+                searchreminderAdpter?.setOnItemClickListener(object :
                     SearchAdapter.OnItemClickListner {
                     override fun onItemClick(type: Int, item: ReminderItem) {
                         binding.searchview.hide()
@@ -593,7 +593,7 @@ class HomeFragment : BaseFragment(), androidx.appcompat.widget.Toolbar.OnMenuIte
                 filteredlist.add(item)
             }
         }
-        searchreminderAdpter.filterList(filteredlist)
+        searchreminderAdpter?.filterList(filteredlist)
 
     }
 
